@@ -875,12 +875,12 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .sidebar-title {
   color: var(--onyx);
-  font-size: var(--fs-5);
+  font-size: var(--fs-3);
   text-transform: uppercase;
   letter-spacing: 0.8px;
   font-weight: var(--weight-600);
