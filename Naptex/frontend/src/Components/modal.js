@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function modal() {
+export default function Modal() {
   return (
     <div className="modal" data-modal>
       <div className="modal-close-overlay" data-modal-overlay></div>

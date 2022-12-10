@@ -1,5 +1,8 @@
-{
-  /* <div className="notification-toast" data-toast>
+import React from "react";
+
+export default function Toast() {
+  return (
+    <div className="notification-toast" data-toast>
       <button className="toast-close-btn" data-toast-close>
         <ion-icon name="close-outline"></ion-icon>
       </button>
@@ -18,7 +21,10 @@
 
         <p className="toast-title">Rose Gold Earrings</p>
 
-        <p className="toast-meta"><time datetime="PT2M">2 Minutes</time> ago</p>
+        <p className="toast-meta">
+          <time datetime="PT2M">2 Minutes</time> ago
+        </p>
       </div>
-    </div>  */
+    </div>
+  );
 }

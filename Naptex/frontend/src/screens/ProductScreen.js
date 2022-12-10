@@ -1,7 +1,6 @@
 import React from "react";
 import Rating from "../Components/Rating";
 import data from "../data";
-// import { useParams } from "react-router-dom";
 
 export default function ProductScreen(props) {
   const product = data.products.find((x) => x.id === props.match.params.id);
@@ -46,14 +45,3 @@ export default function ProductScreen(props) {
     </div>
   );
 }
-
-// function ProductScreen() {
-//   const params = useParams();
-//   const { slug } = params;
-//   return (
-//     <div>
-//       <h1>{slug}</h1>
-//     </div>
-//   );
-// }
-// export default ProductScreen;
