@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Rating(props) {
   const { rating, numReviews } = props;
@@ -50,7 +51,7 @@ export default function Rating(props) {
             : "star-outline"
         }
       ></ion-icon>
-      <a href="/">{numReviews + " Reviews"}</a>
+      <Link to="/">{numReviews + " Reviews"}</Link>
     </div>
   );
 }

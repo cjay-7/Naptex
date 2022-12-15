@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Blog() {
   return (
@@ -6,25 +7,25 @@ export default function Blog() {
       <div className="container">
         <div className="blog-container has-scrollbar">
           <div className="blog-card">
-            <a href="#">
+            <Link to="#">
               <img
                 src="./assets/images/blog-1.jpg"
                 alt="Clothes Retail KPIs 2021 Guide for Clothes Executives"
                 width="300"
                 className="blog-banner"
               />
-            </a>
+            </Link>
 
             <div className="blog-content">
-              <a href="#" className="blog-category">
+              <Link to="#" className="blog-category">
                 Fashion
-              </a>
+              </Link>
 
-              <a href="#">
+              <Link to="#">
                 <h3 className="blog-title">
                   Clothes Retail KPIs 2021 Guide for Clothes Executives.
                 </h3>
-              </a>
+              </Link>
 
               <p className="blog-meta">
                 By <cite>Mr Admin</cite> /
@@ -34,24 +35,24 @@ export default function Blog() {
           </div>
 
           <div className="blog-card">
-            <a href="#">
+            <Link to="#">
               <img
                 src="./assets/images/blog-2.jpg"
                 alt="Curbside fashion Trends: How to Win the Pickup Battle."
                 className="blog-banner"
                 width="300"
               />
-            </a>
+            </Link>
 
             <div className="blog-content">
-              <a href="#" className="blog-category">
+              <Link to="#" className="blog-category">
                 Clothes
-              </a>
+              </Link>
 
               <h3>
-                <a href="#" className="blog-title">
+                <Link to="#" className="blog-title">
                   Curbside fashion Trends: How to Win the Pickup Battle.
-                </a>
+                </Link>
               </h3>
 
               <p className="blog-meta">
@@ -62,24 +63,24 @@ export default function Blog() {
           </div>
 
           <div className="blog-card">
-            <a href="#">
+            <Link to="#">
               <img
                 src="./assets/images/blog-3.jpg"
                 alt="EBT vendors: Claim Your Share of SNAP Online Revenue."
                 className="blog-banner"
                 width="300"
               />
-            </a>
+            </Link>
 
             <div className="blog-content">
-              <a href="#" className="blog-category">
+              <Link to="#" className="blog-category">
                 Shoes
-              </a>
+              </Link>
 
               <h3>
-                <a href="#" className="blog-title">
+                <Link to="#" className="blog-title">
                   EBT vendors: Claim Your Share of SNAP Online Revenue.
-                </a>
+                </Link>
               </h3>
 
               <p className="blog-meta">
@@ -90,24 +91,24 @@ export default function Blog() {
           </div>
 
           <div className="blog-card">
-            <a href="#">
+            <Link to="#">
               <img
                 src="./assets/images/blog-4.jpg"
                 alt="Curbside fashion Trends: How to Win the Pickup Battle."
                 className="blog-banner"
                 width="300"
               />
-            </a>
+            </Link>
 
             <div className="blog-content">
-              <a href="#" className="blog-category">
+              <Link to="#" className="blog-category">
                 Electronics
-              </a>
+              </Link>
 
               <h3>
-                <a href="#" className="blog-title">
+                <Link to="#" className="blog-title">
                   Curbside fashion Trends: How to Win the Pickup Battle.
-                </a>
+                </Link>
               </h3>
 
               <p className="blog-meta">

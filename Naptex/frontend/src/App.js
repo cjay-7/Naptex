@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import HomeScreen from "./Screens/HomeScreen";
@@ -24,8 +24,10 @@ function App() {
 
         <main>
           <div className="content">
-            <Route path="/product/:id" component={ProductScreen} />
-            <Route path="/" exact={true} component={HomeScreen} />
+            <Routes>
+              <Route path="/product/:slug" element={<ProductScreen />} />
+              <Route exact path="/" element={<HomeScreen />} />
+            </Routes>
           </div>
         </main>
 

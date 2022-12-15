@@ -1,24 +1,28 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
 export default function product(props) {
   const { product } = props;
   return (
-    <div key={product._id} className="showcase">
+    <div key={product.slug} className="showcase">
       <div className="showcase-banner">
-        <img
-          src={product.image1}
-          alt={product.name}
-          width="300"
-          className="product-img default"
-        />
-        <img
-          src={product.image2}
-          alt={product.name}
-          width="300"
-          className="product-img hover"
-        />
+        <Link to={`/product/${product.slug}`}>
+          <img
+            src={product.image1}
+            alt={product.name}
+            width="300"
+            className="product-img default"
+          />
+        </Link>
+        <Link to={`/product/${product.slug}`}>
+          <img
+            src={product.image2}
+            alt={product.name}
+            width="300"
+            className="product-img hover"
+          />
+        </Link>
 
         <p className="showcase-badge">
           {Math.floor(
@@ -47,13 +51,13 @@ export default function product(props) {
       </div>
 
       <div className="showcase-content">
-        <a href="#" className="showcase-category">
+        <Link to="/" className="showcase-category">
           {product.category}
-        </a>
+        </Link>
 
-        <a href={`/products/${product._id}`}>
+        <Link to={`/product/${product.slug}`}>
           <h3 className="showcase-title">{product.name}</h3>
-        </a>
+        </Link>
 
         <Rating
           rating={product.rating}

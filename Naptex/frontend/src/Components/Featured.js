@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Featured() {
   return (
@@ -10,8 +11,8 @@ export default function Featured() {
           <div className="showcase">
             <div className="showcase-banner">
               <img
-                src="./assets/images/products/shampoo.jpg"
-                alt="shampoo, conditioner & facewash packs"
+                src="./assets/images/products/jacket-3.webp"
+                alt="Twill Cotton Shirt"
                 className="showcase-img"
               />
             </div>
@@ -21,15 +22,13 @@ export default function Featured() {
                 <ion-icon name="star"></ion-icon>
                 <ion-icon name="star"></ion-icon>
                 <ion-icon name="star"></ion-icon>
-                <ion-icon name="star-outline"></ion-icon>
-                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star-half-outline"></ion-icon>
               </div>
 
-              <a href="#">
-                <h3 className="showcase-title">
-                  shampoo, conditioner & facewash packs
-                </h3>
-              </a>
+              <Link to="#">
+                <h3 className="showcase-title">Twill Cotton Shirt</h3>
+              </Link>
 
               <p className="showcase-desc">
                 Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor
@@ -37,9 +36,9 @@ export default function Featured() {
               </p>
 
               <div className="price-box">
-                <p className="price">₹150.00</p>
+                <p className="price">₹385.00</p>
 
-                <del>₹200.00</del>
+                <del>₹799.00</del>
               </div>
 
               <button className="add-cart-btn">add to cart</button>
@@ -92,8 +91,8 @@ export default function Featured() {
           <div className="showcase">
             <div className="showcase-banner">
               <img
-                src="./assets/images/products/jewellery-1.jpg"
-                alt="Rose Gold diamonds Earring"
+                src="./assets/images/products/shirt-6.jpg"
+                alt="Twill Double 100% Pocket"
                 className="showcase-img"
               />
             </div>
@@ -101,16 +100,16 @@ export default function Featured() {
             <div className="showcase-content">
               <div className="showcase-rating">
                 <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
                 <ion-icon name="star-outline"></ion-icon>
                 <ion-icon name="star-outline"></ion-icon>
               </div>
 
               <h3 className="showcase-title">
-                <a href="#" className="showcase-title">
-                  Rose Gold diamonds Earring
-                </a>
+                <Link to="#" className="showcase-title">
+                  Twill Double 100% Pocket
+                </Link>
               </h3>
 
               <p className="showcase-desc">
@@ -119,8 +118,8 @@ export default function Featured() {
               </p>
 
               <div className="price-box">
-                <p className="price">₹1990.00</p>
-                <del>₹2000.00</del>
+                <p className="price">₹385.00</p>
+                <del>₹650.00</del>
               </div>
 
               <button className="add-cart-btn">add to cart</button>
