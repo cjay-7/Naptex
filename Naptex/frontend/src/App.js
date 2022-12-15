@@ -11,17 +11,11 @@ function App() {
     <BrowserRouter>
       <div className="grid-container">
         <div className="overlay" data-overlay></div>
-
         {/* MODAL */}
-
         {/* NOTIFICATION TOAST */}
-
         {/* HEADER */}
-
         <Header></Header>
-
         {/* MAIN */}
-
         <main>
           <div className="content">
             <Routes>
@@ -30,7 +24,6 @@ function App() {
             </Routes>
           </div>
         </main>
-
         {/* FOOTER */}
         <Footer></Footer>
       </div>

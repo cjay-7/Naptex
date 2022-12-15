@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { React, useReducer, useState, useEffect } from "react";
+import { React, useReducer, useEffect } from "react";
 import axios from "axios";
 import Product from "../Components/Product";
 import Banner from "../Components/Banner";

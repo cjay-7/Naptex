@@ -383,7 +383,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="container">
           <img
-            src="./assets/images/payment.png"
+            src="/assets/images/payment.png"
             alt="payment method"
             className="payment-img"
           />
