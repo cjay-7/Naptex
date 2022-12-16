@@ -51,7 +51,9 @@ export default function Rating(props) {
             : "star-outline"
         }
       ></ion-icon>
-      <Link to="/">{numReviews + " Reviews"}</Link>
+      <span>
+        <Link to="/">{numReviews + " Reviews"}</Link>
+      </span>
     </div>
   );
 }

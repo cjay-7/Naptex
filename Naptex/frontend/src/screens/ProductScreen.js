@@ -45,6 +45,7 @@ export default function ProductScreen(props) {
   ) : (
     <div className="product-screen">
       <div className="container">
+        <div className="breadcrumbs">Breadcrumbs</div>
         <div className="product-screen-container">
           <div className="product-gallery">
             <img src={product.image1} alt={product.name} />
@@ -56,23 +57,32 @@ export default function ProductScreen(props) {
           </div>
 
           <div className="product-info-action">
-            <div className="product-info">
-              <h2>{product.category}</h2>
-              <h1>{product.name}</h1>
-              <h2>
-                Rs.{product.price}
+            <div className="container">
+              <div className="product-info">
+                <h2>{product.category}</h2>
+                <h1>{product.name}</h1>
+                <h2>Rs.{product.price}</h2>
                 <Rating>
                   rating={product.rating}
                   numReviews={product.numReviews}
                 </Rating>
-              </h2>
-              {/* Description:
+                {/* Description:
                     <p>{product.description}</p> */}
-            </div>
+              </div>
 
-            <div className="product-action">
-              <button>Create Custom Size</button>
-              <button>Customize</button>
+              <div className="product-action">
+                <div className="customSize">
+                  <span>
+                    Create your size in just 30 seconds with our fitsmart
+                    technology.
+                  </span>
+                  <button className="product-btn-action">Create Custom Size</button>
+                </div>
+                <div className="customizeCart">
+                  <button className="product-btn-action">Customize</button>
+                  <button className="product-btn-action">Add To Cart</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

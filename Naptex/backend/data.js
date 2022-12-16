@@ -9,7 +9,6 @@ const data = {
       showcaseBadge: "sale",
       discountPrice: 385.0,
       price: 799.0,
-      //   discountPercent: (.price - discountPrice) / price * 100 ,
       rating: 4.5,
       numReviews: 10,
       description: "high quality material",
