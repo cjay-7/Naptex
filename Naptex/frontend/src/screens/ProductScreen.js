@@ -1,7 +1,12 @@
-import { React, useReducer, useEffect } from "react";
+import { React, useReducer, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Rating from "../Components/Rating";
+import { Helmet } from "react-helmet-async";
+import LoadingBox from "../Components/LoadingBox";
+import ErrorMessage from "../Components/ErrorMessage";
+import { getError } from "../Components/utils";
+import { Store } from "../Components/Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -32,16 +37,32 @@ export default function ProductScreen(props) {
         const result = await axios.get(`/api/products/slug/${slug}`);
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
+        dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
     fetchData();
   }, [slug]);
 
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart } = state;
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x._id === product._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert("Sorry, this quantity of product is Out of Stock");
+      return;
+    }
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...product, quantity },
+    });
+  };
+
   return loading ? (
-    <div>Loading...</div>
+    <LoadingBox />
   ) : error ? (
-    <div>{error}</div>
+    <ErrorMessage>{error}</ErrorMessage>
   ) : (
     <div className="product-screen">
       <div className="container">
@@ -60,12 +81,29 @@ export default function ProductScreen(props) {
             <div className="container">
               <div className="product-info">
                 <h2>{product.category}</h2>
+                <Helmet>
+                  <title>Naptex: {product.name}</title>
+                </Helmet>
                 <h1>{product.name}</h1>
                 <h2>Rs.{product.price}</h2>
-                <Rating>
-                  rating={product.rating}
-                  numReviews={product.numReviews}
-                </Rating>
+                <div className="rating-stock-container">
+                  <Rating
+                    rating={product.rating}
+                    numReviews={product.numReviews}
+                  ></Rating>
+                  <div className="stock-container">
+                    Status: &nbsp;
+                    {product.countInStock > 0 ? (
+                      <div className="green">
+                        {" "}
+                        In Stock {product.countInStock}
+                      </div>
+                    ) : (
+                      <div className="red">Out Of Stock</div>
+                    )}
+                  </div>
+                </div>
+
                 {/* Description:
                     <p>{product.description}</p> */}
               </div>
@@ -76,11 +114,18 @@ export default function ProductScreen(props) {
                     Create your size in just 30 seconds with our fitsmart
                     technology.
                   </span>
-                  <button className="product-btn-action">Create Custom Size</button>
+                  <button className="product-btn-action">
+                    Create Custom Size
+                  </button>
                 </div>
                 <div className="customizeCart">
                   <button className="product-btn-action">Customize</button>
-                  <button className="product-btn-action">Add To Cart</button>
+                  <button
+                    onClick={addToCartHandler}
+                    className="product-btn-action"
+                  >
+                    Add To Cart
+                  </button>
                 </div>
               </div>
             </div>

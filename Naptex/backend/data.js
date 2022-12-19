@@ -1,6 +1,7 @@
 const data = {
   products: [
     {
+      _id: "1",
       slug: "Twill Cotton Shirt",
       name: "Twill Cotton Shirt",
       category: "Shirts",
@@ -12,8 +13,10 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: "high quality material",
+      countInStock: 0,
     },
     {
+      _id: "2",
       slug: "Poplin Shirt 132*72 Cotton Laffer Finish",
       name: "Poplin Shirt 132*72 Cotton Laffer Finish",
       category: "Shirts",
@@ -25,8 +28,10 @@ const data = {
       rating: 4.0,
       numReviews: 10,
       description: "high quality material",
+      countInStock: 100,
     },
     {
+      _id: "3",
       slug: "Indigo Twill Checks",
       name: "Indigo Twill Checks",
       category: "Shirts",
@@ -38,8 +43,10 @@ const data = {
       rating: 3.0,
       numReviews: 10,
       description: "high quality material",
+      countInStock: 100,
     },
     {
+      _id: "4",
       slug: "Indigo Twill Checks With Double Pocket Snap Button",
       name: "Indigo Twill Checks With Double Pocket Snap Button",
       category: "Shirts",
@@ -51,8 +58,10 @@ const data = {
       rating: 2.0,
       numReviews: 10,
       description: "high quality material",
+      countInStock: 100,
     },
     {
+      _id: "5",
       slug: "30's Twill Shirt",
       name: "30's Twill Shirt",
       category: "Shirts",
@@ -64,10 +73,12 @@ const data = {
       rating: 1.0,
       numReviews: 10,
       description: "high quality material",
+      countInStock: 100,
     },
     {
-      slug: "Twill Double 100% Pocket",
-      name: "Twill Double 100% Pocket",
+      _id: "6",
+      slug: "Twill Double Pocket",
+      name: "Twill Double Pocket",
       category: "Shirts",
       image1: "/assets/images/products/shirt-6.jpg",
       image2: "/assets/images/products/shirt-6_1.jpg",
@@ -77,6 +88,7 @@ const data = {
       rating: 1.0,
       numReviews: 10,
       description: "high quality material",
+      countInStock: 100,
     },
   ],
 };

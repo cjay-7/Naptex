@@ -6,6 +6,9 @@ import Banner from "../Components/Banner";
 import Featured from "../Components/Featured";
 import Testimonials from "../Components/Testimonials";
 import logger from "use-reducer-logger";
+import { Helmet } from "react-helmet-async";
+import LoadingBox from "../Components/LoadingBox";
+import ErrorMessage from "../Components/ErrorMessage";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -43,6 +46,9 @@ export default function HomeScreen() {
   }, []);
   return (
     <div className="main">
+      <Helmet>
+        <title>Naptex</title>
+      </Helmet>
       {/* BANNER */}
       <Banner></Banner>
       {/* CATEGORY*/}
@@ -56,9 +62,9 @@ export default function HomeScreen() {
               {/* PRODUCT GRID */}
               <div className="product-grid">
                 {loading ? (
-                  <div>Loading...</div>
+                  <LoadingBox />
                 ) : error ? (
-                  <div>{error}</div>
+                  <ErrorMessage>{error}</ErrorMessage>
                 ) : (
                   products.map((product) => (
                     <Product key={product.slug} product={product}></Product>

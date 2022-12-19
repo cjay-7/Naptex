@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Store } from "./Store";
 
 export default function Header() {
+  const { state } = useContext(Store);
+  const { cart } = state;
   return (
     <header>
       <div className="header-top">
@@ -58,12 +61,7 @@ export default function Header() {
             <button className="action-btn">
               <ion-icon name="menu-outline"></ion-icon>
             </button>
-            <Link
-              to="/"
-              className="header-logo"
-              // src="./assets/images/logo/logo.svg" // alt="Anon's logo" //
-              // width="120" // height="50"
-            >
+            <Link to="/" className="header-logo">
               NAPTEX
             </Link>
           </div>
@@ -93,7 +91,9 @@ export default function Header() {
 
             <button className="action-btn">
               <ion-icon name="bag-handle-outline"></ion-icon>
-              <span className="count">0</span>
+              {/* {cart.cartItems.length > 0 && ( */}
+              <span className="count">{cart.cartItems.reduce((a, c) => a + c.quantity, 0)}</span>
+              {/* )} */}
             </button>
           </div>
         </div>

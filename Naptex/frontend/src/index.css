@@ -1693,6 +1693,7 @@ body::-webkit-scrollbar-thumb:hover {
 .product-grid .product-img.default {
   position: relative;
   z-index: 1;
+  height: 300px;
 }
 
 .product-grid .product-img.hover {
@@ -1817,14 +1818,14 @@ body::-webkit-scrollbar-thumb:hover {
   color: var(--eerie-black);
 }
 
-.product-grid .showcase-rating {
+.showcase-rating {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   color: var(--eerie-black);
   margin-bottom: 10px;
-  vertical-align: baseline;
+  align-items: end;
 }
 .showcase-rating a {
   color: #404040;
@@ -1894,10 +1895,41 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: 400;
   margin-bottom: 2%;
 }
+.rating-stock-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+.stock-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: var(--fs-8);
+  margin-top: 3px;
+
+  align-items: baseline;
+}
+.green {
+  background-color: var(--ocean-green);
+  border-radius: 15px;
+  padding: 10px;
+}
+.red {
+  background-color: rgb(238 96 96);
+  border-radius: 15px;
+  padding: 10px;
+}
 
 .customSize,
 .customizeCart {
   margin-top: 5%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   justify-content: space-between;
   text-align: left;
@@ -3527,5 +3559,58 @@ footer {
   .banner-content {
     left: 110px;
     max-width: 460px;
+  }
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: #000 #000 transparent transparent;
+  animation: rotation 1s linear infinite;
+}
+.loader:after,
+.loader:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid;
+  border-color: transparent transparent #ff3d00 #ff3d00;
+  width: 48px - 8px;
+  height: 48px - 8px;
+  border-radius: 50%;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+.footer-category-link:not(:last-child)::after:before {
+  width: 48px - 16px;
+  height: 48px - 16px;
+  border-color: #000 #000 transparent transparent;
+  animation: rotation 1.5s linear infinite;
+}
+
+/* keyFrames */
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
   }
 }
