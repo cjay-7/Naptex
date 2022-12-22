@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Store } from "./Store";
+import { Store } from "../Store";
 
 export default function Header() {
   const { state } = useContext(Store);
@@ -90,10 +90,16 @@ export default function Header() {
             </button>
 
             <button className="action-btn">
-              <ion-icon name="bag-handle-outline"></ion-icon>
-              {/* {cart.cartItems.length > 0 && ( */}
-              <span className="count">{cart.cartItems.reduce((a, c) => a + c.quantity, 0)}</span>
-              {/* )} */}
+              <Link to="/cart">
+                <ion-icon name="bag-handle-outline"></ion-icon>
+                {cart.cartItems.length > 0 ? (
+                  <span className="count">
+                    {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                  </span>
+                ) : (
+                  <span className="count">0</span>
+                )}
+              </Link>
             </button>
           </div>
         </div>
