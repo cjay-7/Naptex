@@ -2295,6 +2295,46 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 /*-----------------------------------*\
+  #SIGN IN
+\*-----------------------------------*/
+.signin-container {
+  width: 40%;
+  height: 70vh;
+}
+.signin-header {
+  margin: 6% 0 3%;
+}
+.signin-email-input input,
+.signin-password-input input {
+  padding: 2% 0;
+  margin: 2% 0px;
+}
+.signin-button {
+  background: var(--eerie-black);
+  padding: 15px;
+  margin-bottom: 3%;
+  width: 16vw;
+  color: var(--white);
+  text-transform: uppercase;
+  -webkit-border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-md);
+  -webkit-transition: var(--transition-timing);
+  -o-transition: var(--transition-timing);
+  transition: var(--transition-timing);
+}
+.signin-button:hover {
+  background: var(--white);
+  color: var(--eerie-black);
+  border: 1px solid #404040;
+}
+.signin-signup-container {
+  display: flex;
+}
+.signin-signup-container a {
+  color: #0c0c7c;
+  text-decoration: underline;
+}
+/*-----------------------------------*\
   #FOOTER
 \*-----------------------------------*/
 

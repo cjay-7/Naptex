@@ -1,7 +1,23 @@
+import bcrypt from "bcryptjs";
+
 const data = {
+  users: [
+    {
+      name: "admin",
+      email: "jchoudhary1892@gmail.com",
+      password: bcrypt.hashSync("12345"),
+      isAdmin: true,
+    },
+    {
+      name: "user1",
+      email: "user@gmail.com",
+      password: bcrypt.hashSync("12345"),
+      isAdmin: false,
+    },
+  ],
   products: [
     {
-      _id: "1",
+      // _id: "1",
       slug: "Twill Cotton Shirt",
       name: "Twill Cotton Shirt",
       category: "Shirts",
@@ -16,7 +32,7 @@ const data = {
       countInStock: 0,
     },
     {
-      _id: "2",
+      // _id: "2",
       slug: "Poplin Shirt 132*72 Cotton Laffer Finish",
       name: "Poplin Shirt 132*72 Cotton Laffer Finish",
       category: "Shirts",
@@ -31,7 +47,7 @@ const data = {
       countInStock: 100,
     },
     {
-      _id: "3",
+      // _id: "3",
       slug: "Indigo Twill Checks",
       name: "Indigo Twill Checks",
       category: "Shirts",
@@ -46,7 +62,7 @@ const data = {
       countInStock: 100,
     },
     {
-      _id: "4",
+      // _id: "4",
       slug: "Indigo Twill Checks With Double Pocket Snap Button",
       name: "Indigo Twill Checks With Double Pocket Snap Button",
       category: "Shirts",
@@ -61,7 +77,7 @@ const data = {
       countInStock: 100,
     },
     {
-      _id: "5",
+      // _id: "5",
       slug: "30's Twill Shirt",
       name: "30's Twill Shirt",
       category: "Shirts",
@@ -76,7 +92,7 @@ const data = {
       countInStock: 100,
     },
     {
-      _id: "6",
+      // _id: "6",
       slug: "Twill Double Pocket",
       name: "Twill Double Pocket",
       category: "Shirts",
