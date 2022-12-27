@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import { Store } from "../Store";
 
 export default function Header() {
-  const { state } = useContext(Store);
-  const { cart } = state;
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+
+  const signoutHandler = () => {
+    ctxDispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userinfo");
+  };
   return (
     <header>
       <div className="header-top">
@@ -45,7 +50,7 @@ export default function Header() {
           <div className="header-top-actions">
             <select name="currency">
               <option value="eur">INR ₹</option>
-              <option value="usd">USD &dollar;</option>
+              <option value="usd">USD $</option>
             </select>
 
             <select name="language">
@@ -80,9 +85,33 @@ export default function Header() {
           </div>
 
           <div className="header-user-actions">
-            <button className="action-btn">
-              <ion-icon name="person-outline"></ion-icon>
-            </button>
+            {userInfo ? (
+              <div className="dropdown">
+                <button className="action-btn dropbtn">
+                  <ion-icon name="person-outline"></ion-icon>
+                </button>
+                <div className="user-info dropdown-content">
+                  <div>
+                    <Link to="/profile">User Profile</Link>
+                  </div>
+                  <div>
+                    <Link to="/orderhistory">Order History</Link>
+                  </div>
+                  <div>
+                    <Link to="#signout" onClick={signoutHandler}>
+                      Sign Out
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <button className="action-btn ">
+                <Link to="/signin">
+                  {" "}
+                  <ion-icon name="person-outline"></ion-icon>
+                </Link>
+              </button>
+            )}
 
             <button className="action-btn">
               <ion-icon name="heart-outline"></ion-icon>
