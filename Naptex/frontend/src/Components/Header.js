@@ -9,6 +9,7 @@ export default function Header() {
   const signoutHandler = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userinfo");
+    localStorage.removeItem("shippingAddress");
   };
   return (
     <header>

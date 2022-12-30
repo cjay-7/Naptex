@@ -611,6 +611,9 @@ body::-webkit-scrollbar-thumb:hover {
 .header-search-container {
   position: relative;
 }
+.action-btn a {
+  color: var(--onyx);
+}
 
 .header-search-container .search-field {
   font-size: var(--fs-7);
@@ -2335,6 +2338,62 @@ body::-webkit-scrollbar-thumb:hover {
   text-decoration: underline;
 }
 /*-----------------------------------*\
+  #Shipping
+\*-----------------------------------*/
+
+.shipping-container {
+  margin: 3% 5%;
+}
+.shipping-form {
+  margin-top: 2%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.shipping-form input {
+  margin: 2% 0 0;
+  padding: 1%;
+}
+.shipping-form div:first-of-type {
+  grid-column: span 2;
+}
+.shipping-button {
+  background: var(--eerie-black);
+  padding: 15px;
+  margin-bottom: 3%;
+  width: 16vw;
+  color: var(--white);
+  text-transform: uppercase;
+  -webkit-border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-md);
+  -webkit-transition: var(--transition-timing);
+  -o-transition: var(--transition-timing);
+  transition: var(--transition-timing);
+}
+.shipping-button:hover {
+  background: var(--white);
+  color: var(--eerie-black);
+  border: 1px solid #404040;
+}
+
+.checkout-steps {
+  display: flex;
+  margin-bottom: 3%;
+}
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #a0a0a0a0;
+  color: #a0a0a0a0;
+  width: 25%;
+  text-align: center;
+}
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid var(--eerie-black);
+  color: var(--eerie-black);
+  width: 25%;
+  text-align: center;
+}
+/*-----------------------------------*\
   #FOOTER
 \*-----------------------------------*/
 
@@ -3088,9 +3147,7 @@ footer {
     color: var(--onyx);
     padding: 5px;
   }
-  .action-btn a {
-    color: var(--onyx);
-  }
+
   /* The dropdown container */
   .dropdown {
     float: left;
