@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Store } from "../Store";
 
@@ -8,9 +8,11 @@ export default function Header() {
 
   const signoutHandler = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
-    localStorage.removeItem("userinfo");
+    localStorage.removeItem("userInfo");
     localStorage.removeItem("shippingAddress");
+    // localStorage.clear();
   };
+  console.log(userInfo);
   return (
     <header>
       <div className="header-top">

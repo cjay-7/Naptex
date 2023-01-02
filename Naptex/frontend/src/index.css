@@ -2300,19 +2300,26 @@ body::-webkit-scrollbar-thumb:hover {
 /*-----------------------------------*\
   #SIGN IN
 \*-----------------------------------*/
-.signin-container {
+.signin-container,
+.signup-container {
   width: 40%;
   height: 70vh;
 }
-.signin-header {
+.signin-header,
+.signup-header {
   margin: 6% 0 3%;
 }
 .signin-email-input input,
-.signin-password-input input {
+.signin-password-input input,
+.signup-name-input input,
+.signup-email-input input,
+.signup-password-input input,
+.signup-confirmPassword-input input {
   padding: 2% 0;
   margin: 2% 0px;
 }
-.signin-button {
+.signin-button,
+.signup-button {
   background: var(--eerie-black);
   padding: 15px;
   margin-bottom: 3%;
@@ -2325,7 +2332,8 @@ body::-webkit-scrollbar-thumb:hover {
   -o-transition: var(--transition-timing);
   transition: var(--transition-timing);
 }
-.signin-button:hover {
+.signin-button:hover,
+.signup-button:hover {
   background: var(--white);
   color: var(--eerie-black);
   border: 1px solid #404040;
@@ -2334,8 +2342,8 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
 }
 .signin-signup-container a {
-  color: #0c0c7c;
-  text-decoration: underline;
+  color: #0c0c7c !important;
+  text-decoration: underline !important;
 }
 /*-----------------------------------*\
   #Shipping

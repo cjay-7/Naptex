@@ -15,6 +15,7 @@ export default function SigninScreen() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedin, setIsLoggedin] = useState(false);
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
@@ -28,6 +29,7 @@ export default function SigninScreen() {
       });
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
+      setIsLoggedin(true);
       navigate(redirect || "/");
     } catch (err) {
       toast.error(getError(err), {
