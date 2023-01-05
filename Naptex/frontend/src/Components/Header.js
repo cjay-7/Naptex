@@ -10,9 +10,10 @@ export default function Header() {
     ctxDispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
     localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
     // localStorage.clear();
   };
-  console.log(userInfo);
+
   return (
     <header>
       <div className="header-top">

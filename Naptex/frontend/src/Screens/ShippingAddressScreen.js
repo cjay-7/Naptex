@@ -8,7 +8,7 @@ export default function ShippingAddress() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
-    // cartItems,
+    cartItems,
     userInfo,
     cart: { shippingAddress },
   } = state;
@@ -16,10 +16,12 @@ export default function ShippingAddress() {
     if (!userInfo) {
       navigate("/signin?redirect=/shipping");
     }
-    // if (!cartItems) {
-    //   navigate("/cart");
-    // }
   }, [userInfo, navigate]);
+  // useEffect(() => {
+  //   if (!cartItems) {
+  //     navigate("/cart");
+  //   }
+  // }, [cartItems, navigate]);
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
   const [address1, setAddress1] = useState(shippingAddress.address1 || "");
   const [address2, setAddress2] = useState(shippingAddress.address2 || "");
@@ -104,7 +106,6 @@ export default function ShippingAddress() {
             required
           />
         </div>
-
         <div>
           <button className="shipping-button " type="submit">
             Continue

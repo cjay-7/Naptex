@@ -236,6 +236,9 @@ body::-webkit-scrollbar-thumb:hover {
   margin-bottom: 30px;
 }
 
+.flex {
+  display: flex;
+}
 /*-----------------------------------*\
   #MAIN
 \*-----------------------------------*/
@@ -2386,7 +2389,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .checkout-steps {
   display: flex;
-  margin-bottom: 3%;
+  margin-bottom: 2%;
 }
 
 .checkout-steps > div {
@@ -2400,6 +2403,179 @@ body::-webkit-scrollbar-thumb:hover {
   color: var(--eerie-black);
   width: 25%;
   text-align: center;
+}
+
+/*-----------------------------------*\
+  #Payment
+\*-----------------------------------*/
+
+.checkout-steps-container {
+  margin: 5% auto;
+  width: 90%;
+}
+
+.payment-method-container {
+  width: 60%;
+  margin: 5% auto;
+}
+
+.payment-method-container > * {
+  margin: 5% 0;
+}
+
+.lbl-radio {
+  border: 2px solid #a0a0a0a0;
+  height: 3.3em;
+  border-radius: 0.5em;
+  margin: 5% 0;
+  display: flex;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+}
+.lbl-radio-small {
+  width: 6rem;
+}
+.lbl-radio-big {
+  width: 12rem;
+}
+
+.lbl-radio .content .radio-titles {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.lbl-radio .content .subtext {
+  opacity: 0.5;
+  font-size: 14px;
+}
+
+.marker {
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  margin: 0 5px 0 10px;
+}
+
+input[type="radio"]:checked + .lbl-radio {
+  border-color: var(--onyx);
+}
+
+input[type="radio"]:checked + .lbl-radio > .marker {
+  border: 4px solid var(--onyx);
+}
+
+input[type="radio"] {
+  display: inline;
+  visibility: visible;
+  opacity: 0;
+  position: absolute;
+  width: 100px;
+  border: 4px solid var(--onyx);
+}
+input[type="radio"]:focus + .lbl-radio > .marker {
+  border: 4px solid var(--onyx);
+}
+
+.payment-button {
+  background: var(--eerie-black);
+  padding: 15px;
+  margin-bottom: 3%;
+  width: 16vw;
+  color: var(--white);
+  text-transform: uppercase;
+  -webkit-border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-md);
+  -webkit-transition: var(--transition-timing);
+  -o-transition: var(--transition-timing);
+  transition: var(--transition-timing);
+}
+.payment-button:hover {
+  background: var(--white);
+  color: var(--eerie-black);
+  border: 1px solid #404040;
+}
+/*-----------------------------------*\
+  #ORDER SUMMARY
+\*-----------------------------------*/
+.order-summary {
+  margin-top: 2%;
+  min-height: 100vh;
+}
+.order-summary-header {
+  margin: 0 3% 1%;
+}
+.order-summary-container {
+  margin: 0 3%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+}
+
+.order-summary-shipping {
+  padding: 2%;
+  border: 1px solid var(--onyx);
+  line-height: 1.3;
+}
+.order-summary-shipping a,
+.order-summary-payment a,
+.order-summary-items a {
+  text-decoration: underline;
+}
+.order-summary-payment {
+  padding: 2%;
+  border: 1px solid var(--onyx);
+  line-height: 1.3;
+}
+
+.order-summary-items {
+  padding: 2%;
+  border: 1px solid var(--onyx);
+  line-height: 1.3;
+}
+.order-summary-items-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+  text-align: center;
+}
+.order-summary-items-img-thumbnail-container {
+  display: flex;
+  align-items: center;
+}
+.order-summary-items-img-thumbnail {
+  width: 150px;
+}
+
+.order-summary-action {
+  padding: 5%;
+  border: 1px solid var(--onyx);
+  line-height: 1.3;
+}
+.order-summary-action > * {
+  justify-content: space-between;
+  margin-bottom: 3%;
+}
+
+.order-summary-button {
+  background: var(--eerie-black);
+  padding: 15px;
+  margin-bottom: 3%;
+  width: 100%;
+  color: var(--white);
+  text-transform: uppercase;
+  -webkit-border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-md);
+  -webkit-transition: var(--transition-timing);
+  -o-transition: var(--transition-timing);
+  transition: var(--transition-timing);
+}
+.order-summary-button:hover {
+  background: var(--white);
+  color: var(--eerie-black);
+  border: 1px solid #404040;
 }
 /*-----------------------------------*\
   #FOOTER
