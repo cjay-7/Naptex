@@ -1005,6 +1005,9 @@ body::-webkit-scrollbar-thumb:hover {
   -o-transition: var(--transition-timing);
   transition: var(--transition-timing);
 }
+.banner-btn:visited {
+  color: var(--white);
+}
 
 .banner-btn:hover {
   background: var(--eerie-black);

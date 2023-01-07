@@ -35,7 +35,7 @@ export default function PaymentMethodScreen() {
 
         <h1>Payment Method</h1>
         <form onSubmit={submitHandler}>
-          <div class="radio-container">
+          <div className="radio-container">
             <input
               type="radio"
               name="credit"
@@ -44,10 +44,10 @@ export default function PaymentMethodScreen() {
               checked={paymentMethodName === "credit"}
               onChange={(e) => setPaymentMethodName(e.target.value)}
             />
-            <label for="credit" class="lbl-radio">
-              <div class="marker"></div>
-              <div class="content">
-                <div class="radio-title">Credit</div>
+            <label for="credit" className="lbl-radio">
+              <div className="marker"></div>
+              <div className="content">
+                <div className="radio-title">Credit</div>
               </div>
             </label>
 
@@ -59,10 +59,10 @@ export default function PaymentMethodScreen() {
               checked={paymentMethodName === "razorPay"}
               onChange={(e) => setPaymentMethodName(e.target.value)}
             />
-            <label for="razorPay" class="lbl-radio">
-              <div class="marker"></div>
-              <div class="content">
-                <div class="radio-title">RazorPay</div>
+            <label for="razorPay" className="lbl-radio">
+              <div className="marker"></div>
+              <div className="content">
+                <div className="radio-title">RazorPay</div>
               </div>
             </label>
           </div>
