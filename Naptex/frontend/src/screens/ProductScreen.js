@@ -87,7 +87,8 @@ export default function ProductScreen(props) {
                   <title>Naptex: {product.name}</title>
                 </Helmet>
                 <h1>{product.name}</h1>
-                <h2>Rs.{product.price}</h2>
+                <h2>Rs.{product.discountPrice} </h2>
+                <del>Rs.{product.price}</del>
                 <div className="rating-stock-container">
                   <Rating
                     rating={product.rating}
@@ -105,7 +106,6 @@ export default function ProductScreen(props) {
                     )}
                   </div>
                 </div>
-
                 {/* Description:
                     <p>{product.description}</p> */}
               </div>

@@ -44,7 +44,7 @@ export default function PaymentMethodScreen() {
               checked={paymentMethodName === "credit"}
               onChange={(e) => setPaymentMethodName(e.target.value)}
             />
-            <label for="credit" className="lbl-radio">
+            <label htmlFor="credit" className="lbl-radio">
               <div className="marker"></div>
               <div className="content">
                 <div className="radio-title">Credit</div>
@@ -59,7 +59,7 @@ export default function PaymentMethodScreen() {
               checked={paymentMethodName === "razorPay"}
               onChange={(e) => setPaymentMethodName(e.target.value)}
             />
-            <label for="razorPay" className="lbl-radio">
+            <label htmlFor="razorPay" className="lbl-radio">
               <div className="marker"></div>
               <div className="content">
                 <div className="radio-title">RazorPay</div>
