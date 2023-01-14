@@ -1,7 +1,6 @@
 {
-  "name": "Naptex",
+  "name": "naptex",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "cd backend && npm install  && cd ../frontend && npm install --force && npm run build --force",
@@ -13,5 +12,10 @@
     "url": "git+https://github.com/cjay-7/Naptex.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cjay-7/Naptex/issues"
+  },
+  "homepage": "https://github.com/cjay-7/Naptex#readme",
+  "description": ""
 }
