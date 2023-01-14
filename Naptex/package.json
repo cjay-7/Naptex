@@ -1,0 +1,17 @@
+{
+  "name": "naptex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd backend && npm install  && cd ../frontend && npm install --force && npm run build --force",
+    "start": "node backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjay-7/Naptex.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
