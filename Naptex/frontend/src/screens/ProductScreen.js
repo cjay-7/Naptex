@@ -5,7 +5,7 @@ import Rating from "../Components/Rating";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../Components/LoadingBox";
 import ErrorMessage from "../Components/ErrorMessage";
-import { getError } from "../Components/utils";
+import { getError } from "../utils";
 import { Store } from "../Store";
 
 const reducer = (state, action) => {

@@ -132,13 +132,13 @@ export default function CartScreen() {
       <div className="cart-action">
         <h1 className="cart-header">Shopping Cart</h1>
         <div className="cart-total-price-checkout">
-          <h3>Cart total quantity: </h3>
-          <h3>
+          <h5>Cart total quantity: </h5>
+          <h5>
             {cartItems.reduce((a, c) => a + c.quantity * 1, 0)}
             {" Items"}
-          </h3>
-          <h3>Cart total Price: </h3>
-          <h3>Rs. {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}</h3>
+          </h5>
+          <h5>Cart total Price: </h5>
+          <h5>Rs. {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}</h5>
           <button
             className="cart-button"
             disabled={cartItems.length === 0}

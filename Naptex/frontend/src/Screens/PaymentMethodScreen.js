@@ -53,16 +53,16 @@ export default function PaymentMethodScreen() {
 
             <input
               type="radio"
-              name="razorPay"
-              id="razorPay"
-              value="razorPay"
-              checked={paymentMethodName === "razorPay"}
+              name="stripe"
+              id="stripe"
+              value="stripe"
+              checked={paymentMethodName === "stripe"}
               onChange={(e) => setPaymentMethodName(e.target.value)}
             />
-            <label htmlFor="razorPay" className="lbl-radio">
+            <label htmlFor="stripe" className="lbl-radio">
               <div className="marker"></div>
               <div className="content">
-                <div className="radio-title">RazorPay</div>
+                <div className="radio-title">stripe</div>
               </div>
             </label>
           </div>

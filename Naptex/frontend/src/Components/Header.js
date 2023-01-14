@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "react-bootstrap/Navbar";
+import Badge from "react-bootstrap/Badge";
+import Nav from "react-bootstrap/Nav";
+import { LinkContainer } from "react-router-bootstrap";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { Store } from "../Store";
 
 export default function Header() {
@@ -11,6 +16,7 @@ export default function Header() {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("paymentMethod");
+    window.location.href = "/signin";
     // localStorage.clear();
   };
 
@@ -45,10 +51,8 @@ export default function Header() {
           </ul>
 
           <div className="header-alert-news">
-            <p>
-              <b>Shipping For </b>
-              Order Over - ₹10000
-            </p>
+            <b>Shipping For </b>
+            Order Over - ₹10000
           </div>
 
           <div className="header-top-actions">
@@ -64,15 +68,17 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <div className="header-main">
+      <Navbar className="header-main">
         <div className="container">
           <div className="header-left">
             <button className="action-btn">
               <ion-icon name="menu-outline"></ion-icon>
             </button>
-            <Link to="/" className="header-logo">
-              NAPTEX
-            </Link>
+            <Navbar.Brand>
+              <Link to="/" className="header-logo">
+                NAPTEX
+              </Link>
+            </Navbar.Brand>
           </div>
 
           <div className="header-search-container">
@@ -90,10 +96,26 @@ export default function Header() {
 
           <div className="header-user-actions">
             {userInfo ? (
-              <div className="dropdown">
-                <button className="action-btn dropbtn">
+              // <div className="dropdown">
+              <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                <LinkContainer to="/profile">
+                  <NavDropdown.Item>User Profile</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/orderhistory">
+                  <NavDropdown.Item>Order History</NavDropdown.Item>
+                </LinkContainer>
+                <NavDropdown.Divider />
+                <Link
+                  className="dropdown-item"
+                  to="#signout"
+                  onClick={signoutHandler}
+                >
+                  Sign Out
+                </Link>
+
+                {/* <button className="action-btn dropbtn">
                   <ion-icon name="person-outline"></ion-icon>
-                </button>
+                </button> 
                 <div className="user-info dropdown-content">
                   <div>
                     <Link to="/profile">User Profile</Link>
@@ -106,9 +128,10 @@ export default function Header() {
                       Sign Out
                     </Link>
                   </div>
-                </div>
-              </div>
+                </div> */}
+              </NavDropdown>
             ) : (
+              // </div>
               <button className="action-btn ">
                 <Link to="/signin">
                   {" "}
@@ -136,7 +159,7 @@ export default function Header() {
             </button>
           </div>
         </div>
-      </div>
+      </Navbar>
       {/* <nav className="desktop-navigation-menu">
         <div className="container">
           <ul className="desktop-menu-category-list">

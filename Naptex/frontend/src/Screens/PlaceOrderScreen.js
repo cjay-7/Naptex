@@ -5,7 +5,7 @@ import CheckoutSteps from "../Components/CheckoutSteps";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
-import { getError } from "../Components/utils";
+import { getError } from "../utils";
 import LoadingBox from "../Components/LoadingBox";
 
 const reducer = (state, action) => {
@@ -92,40 +92,6 @@ export default function PlaceOrderScreen() {
           <br />
           <Link to="/shipping">Edit</Link>
         </div>
-        <div className="order-summary-payment">
-          <h2>Payment</h2>
-          <br />
-          <strong>Method:</strong>
-          {cart.paymentMethod} <br />
-          <br />
-          <Link to="/payment">Edit</Link>
-        </div>
-        <div className="order-summary-items">
-          <h2>Items</h2>
-          <br />
-          <div>
-            {cart.cartItems.map((item) => (
-              <div className="order-summary-items-container" key={item._id}>
-                <div className="order-summary-items-img-thumbnail-container">
-                  <img
-                    src={item.image1}
-                    alt={item.name}
-                    className="order-summary-items-img-thumbnail"
-                  />
-                  <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                </div>
-                <div>
-                  <strong>Qty.</strong> {item.quantity}
-                </div>
-                <div>
-                  <strong>Price:</strong> Rs.{item.price}
-                </div>
-              </div>
-            ))}
-          </div>
-          <br />
-          <Link to="/cart">Edit</Link>
-        </div>
         <div className="order-summary-action">
           <h2>Order Summary</h2>
           <br />
@@ -157,6 +123,40 @@ export default function PlaceOrderScreen() {
             </button>
           </div>
           {loading && <LoadingBox></LoadingBox>}
+        </div>
+        <div className="order-summary-items">
+          <h2>Items</h2>
+          <br />
+          <div>
+            {cart.cartItems.map((item) => (
+              <div className="order-summary-items-container" key={item._id}>
+                <div className="order-summary-items-img-thumbnail-container">
+                  <img
+                    src={item.image1}
+                    alt={item.name}
+                    className="order-summary-items-img-thumbnail"
+                  />
+                  <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                </div>
+                <div>
+                  <strong>Qty.</strong> {item.quantity}
+                </div>
+                <div>
+                  <strong>Price:</strong> Rs.{item.discountPrice}
+                </div>
+              </div>
+            ))}
+          </div>
+          <br />
+          <Link to="/cart">Edit</Link>
+        </div>
+        <div className="order-summary-payment">
+          <h2>Payment</h2>
+          <br />
+          <strong>Method:</strong>
+          {cart.paymentMethod} <br />
+          <br />
+          <Link to="/payment">Edit</Link>
         </div>
       </div>
     </div>
