@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useReducer } from "react";
 import Axios from "axios";
 import { Store } from "../Store";
-import CheckoutSteps from "../Components/CheckoutSteps";
+import CheckoutSteps from "../components/CheckoutSteps";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
-import LoadingBox from "../Components/LoadingBox";
+import LoadingBox from "../components/LoadingBox";
 
 const reducer = (state, action) => {
   switch (action.type) {

@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
@@ -6,6 +7,10 @@ import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Store } from "../Store";
+import Button from "react-bootstrap/Button";
+import { getError } from "./utils";
+import axios from "axios";
+import SearchBox from "../components/SearchBox";
 
 export default function Header() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -20,147 +25,151 @@ export default function Header() {
     // localStorage.clear();
   };
 
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/categories`);
+        setCategories(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchCategories();
+  }, []);
+
   return (
-    <header>
-      <div className="header-top">
-        <div className="container">
-          <ul className="header-social-container">
-            <li>
-              <Link to="/" className="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </Link>
-            </li>
+    <div>
+      <header>
+        <div className="header-top">
+          <div className="container">
+            <ul className="header-social-container">
+              <li>
+                <Link to="/" className="social-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </Link>
+              </li>
 
-            <li>
-              <Link to="/" className="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </Link>
-            </li>
+              <li>
+                <Link to="/" className="social-link">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </Link>
+              </li>
 
-            <li>
-              <Link to="/" className="social-link">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </Link>
-            </li>
+              <li>
+                <Link to="/" className="social-link">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </Link>
+              </li>
 
-            <li>
-              <Link to="/" className="social-link">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </Link>
-            </li>
-          </ul>
+              <li>
+                <Link to="/" className="social-link">
+                  <ion-icon name="logo-linkedin"></ion-icon>
+                </Link>
+              </li>
+            </ul>
 
-          <div className="header-alert-news">
-            <b>Shipping For </b>
-            Order Over - ₹10000
-          </div>
+            <div className="header-alert-news">
+              <b>Shipping For </b>
+              Order Over - ₹10000
+            </div>
 
-          <div className="header-top-actions">
-            <select name="currency">
-              <option value="eur">INR ₹</option>
-              <option value="usd">USD $</option>
-            </select>
+            <div className="header-top-actions">
+              <select name="currency">
+                <option value="eur">INR ₹</option>
+                <option value="usd">USD $</option>
+              </select>
 
-            <select name="language">
-              <option value="en-US">English</option>
-              <option value="	hi">Hindi</option>
-            </select>
+              <select name="language">
+                <option value="en-US">English</option>
+                <option value="	hi">Hindi</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
-      <Navbar className="header-main">
-        <div className="container">
-          <div className="header-left">
-            <button className="action-btn">
-              <ion-icon name="menu-outline"></ion-icon>
-            </button>
-            <Navbar.Brand>
-              <Link to="/" className="header-logo">
-                NAPTEX
-              </Link>
-            </Navbar.Brand>
-          </div>
 
-          <div className="header-search-container">
-            <input
-              type="search"
-              name="search"
-              className="search-field"
-              placeholder="Enter your product name..."
-            />
-
-            <button className="search-btn">
-              <ion-icon name="search-outline"></ion-icon>
-            </button>
-          </div>
-
-          <div className="header-user-actions">
-            {userInfo ? (
-              // <div className="dropdown">
-              <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                <LinkContainer to="/profile">
-                  <NavDropdown.Item>User Profile</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/orderhistory">
-                  <NavDropdown.Item>Order History</NavDropdown.Item>
-                </LinkContainer>
-                <NavDropdown.Divider />
-                <Link
-                  className="dropdown-item"
-                  to="#signout"
-                  onClick={signoutHandler}
-                >
-                  Sign Out
+        <ToastContainer position="bottom-center" limit={1} />
+        <Navbar className="header-main">
+          <div className="container">
+            <div className="header-left">
+              <Button
+                variant="dark"
+                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+              >
+                <ion-icon name="menu-outline"></ion-icon>
+              </Button>
+              <Navbar.Brand>
+                <Link to="/" className="header-logo">
+                  NAPTEX
                 </Link>
+              </Navbar.Brand>
+            </div>
 
-                {/* <button className="action-btn dropbtn">
-                  <ion-icon name="person-outline"></ion-icon>
-                </button> 
-                <div className="user-info dropdown-content">
-                  <div>
-                    <Link to="/profile">User Profile</Link>
-                  </div>
-                  <div>
-                    <Link to="/orderhistory">Order History</Link>
-                  </div>
-                  <div>
-                    <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
-                    </Link>
-                  </div>
-                </div> */}
-              </NavDropdown>
-            ) : (
-              // </div>
-              <button className="action-btn ">
-                <Link to="/signin">
-                  {" "}
-                  <ion-icon name="person-outline"></ion-icon>
+            {/* <div className="header-search-container">
+              <input
+                type="search"
+                name="search"
+                className="search-field"
+                placeholder="Enter your product name..."
+              />
+
+              <button className="search-btn">
+                <ion-icon name="search-outline"></ion-icon>
+              </button>
+            </div> */}
+            <SearchBox />
+
+            <div className="header-user-actions">
+              {userInfo ? (
+                // <div className="dropdown">
+                <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                  <LinkContainer to="/profile">
+                    <NavDropdown.Item>User Profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/orderhistory">
+                    <NavDropdown.Item>Order History</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Divider />
+                  <Link
+                    className="dropdown-item"
+                    to="#signout"
+                    onClick={signoutHandler}
+                  >
+                    Sign Out
+                  </Link>
+                </NavDropdown>
+              ) : (
+                <button className="action-btn ">
+                  <Link to="/signin">
+                    {" "}
+                    <ion-icon name="person-outline"></ion-icon>
+                  </Link>
+                </button>
+              )}
+
+              <button className="action-btn">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span className="count">0</span>
+              </button>
+
+              <button className="action-btn">
+                <Link to="/cart">
+                  <ion-icon name="bag-handle-outline"></ion-icon>
+                  {cart.cartItems.length > 0 ? (
+                    <span className="count">
+                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                    </span>
+                  ) : (
+                    <span className="count">0</span>
+                  )}
                 </Link>
               </button>
-            )}
-
-            <button className="action-btn">
-              <ion-icon name="heart-outline"></ion-icon>
-              <span className="count">0</span>
-            </button>
-
-            <button className="action-btn">
-              <Link to="/cart">
-                <ion-icon name="bag-handle-outline"></ion-icon>
-                {cart.cartItems.length > 0 ? (
-                  <span className="count">
-                    {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                  </span>
-                ) : (
-                  <span className="count">0</span>
-                )}
-              </Link>
-            </button>
+            </div>
           </div>
-        </div>
-      </Navbar>
-      {/* <nav className="desktop-navigation-menu">
+        </Navbar>
+        {/* <nav className="desktop-navigation-menu">
         <div className="container">
           <ul className="desktop-menu-category-list">
             <li className="menu-category">
@@ -411,242 +420,82 @@ export default function Header() {
           </ul>
         </div>
       </nav> */}
-      <div className="mobile-bottom-navigation">
-        <button className="action-btn" data-mobile-menu-open-btn>
-          <ion-icon name="menu-outline"></ion-icon>
-        </button>
+        <div className="mobile-bottom-navigation">
+          <button className="action-btn" data-mobile-menu-open-btn>
+            <ion-icon name="menu-outline"></ion-icon>
+          </button>
 
-        <button className="action-btn">
-          <ion-icon name="bag-handle-outline"></ion-icon>
+          <button className="action-btn">
+            <ion-icon name="bag-handle-outline"></ion-icon>
 
-          <span className="count">0</span>
-        </button>
+            <span className="count">0</span>
+          </button>
 
-        <button className="action-btn">
-          <ion-icon name="home-outline"></ion-icon>
-        </button>
+          <button className="action-btn">
+            <ion-icon name="home-outline"></ion-icon>
+          </button>
 
-        <button className="action-btn">
-          <ion-icon name="heart-outline"></ion-icon>
+          <button className="action-btn">
+            <ion-icon name="heart-outline"></ion-icon>
 
-          <span className="count">0</span>
-        </button>
+            <span className="count">0</span>
+          </button>
 
-        <button className="action-btn" data-mobile-menu-open-btn>
-          <ion-icon name="grid-outline"></ion-icon>
-        </button>
-      </div>
-      <nav className="mobile-navigation-menu has-scrollbar" data-mobile-menu>
-        <div className="menu-top">
-          <h2 className="menu-title">Menu</h2>
-
-          <button className="menu-close-btn" data-mobile-menu-close-btn>
-            <ion-icon name="close-outline"></ion-icon>
+          <button className="action-btn" data-mobile-menu-open-btn>
+            <ion-icon name="grid-outline"></ion-icon>
           </button>
         </div>
+        <nav className="mobile-navigation-menu has-scrollbar" data-mobile-menu>
+          <div className="menu-top">
+            <h2 className="menu-title">Menu</h2>
 
-        <ul className="mobile-menu-category-list">
-          <li className="menu-category">
-            <Link to="/" className="menu-title">
-              Home
-            </Link>
-          </li>
-
-          <li className="menu-category">
-            <button className="accordion-menu" data-accordion-btn>
-              <p className="menu-title">Men's</p>
-
-              <div>
-                <ion-icon name="add-outline" className="add-icon"></ion-icon>
-                <ion-icon
-                  name="remove-outline"
-                  className="remove-icon"
-                ></ion-icon>
-              </div>
+            <button className="menu-close-btn" data-mobile-menu-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
             </button>
+          </div>
 
-            <ul className="submenu-category-list" data-accordion>
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Shirt
-                </Link>
-              </li>
+          <ul className="mobile-menu-category-list">
+            <li className="menu-category">
+              <Link to="/" className="menu-title">
+                Home
+              </Link>
+            </li>
 
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Shorts & Jeans
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Safety Shoes
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Wallet
-                </Link>
-              </li>
-            </ul>
-          </li>
-
-          <li className="menu-category">
-            <button className="accordion-menu" data-accordion-btn>
-              <p className="menu-title">Women's</p>
-
-              <div>
-                <ion-icon name="add-outline" className="add-icon"></ion-icon>
-                <ion-icon
-                  name="remove-outline"
-                  className="remove-icon"
-                ></ion-icon>
-              </div>
-            </button>
-
-            <ul className="submenu-category-list" data-accordion>
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Dress & Frock
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Earrings
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Necklace
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Makeup Kit
-                </Link>
-              </li>
-            </ul>
-          </li>
-
-          <li className="menu-category">
-            <button className="accordion-menu" data-accordion-btn>
-              <p className="menu-title">Jewelry</p>
-
-              <div>
-                <ion-icon name="add-outline" className="add-icon"></ion-icon>
-                <ion-icon
-                  name="remove-outline"
-                  className="remove-icon"
-                ></ion-icon>
-              </div>
-            </button>
-
-            <ul className="submenu-category-list" data-accordion>
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Earrings
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Couple Rings
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Necklace
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Bracelets
-                </Link>
-              </li>
-            </ul>
-          </li>
-
-          <li className="menu-category">
-            <button className="accordion-menu" data-accordion-btn>
-              <p className="menu-title">Perfume</p>
-
-              <div>
-                <ion-icon name="add-outline" className="add-icon"></ion-icon>
-                <ion-icon
-                  name="remove-outline"
-                  className="remove-icon"
-                ></ion-icon>
-              </div>
-            </button>
-
-            <ul className="submenu-category-list" data-accordion>
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Clothes Perfume
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Deodorant
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Flower Fragrance
-                </Link>
-              </li>
-
-              <li className="submenu-category">
-                <Link to="/" className="submenu-title">
-                  Air Freshener
-                </Link>
-              </li>
-            </ul>
-          </li>
-
-          <li className="menu-category">
-            <Link to="/" className="menu-title">
-              Blog
-            </Link>
-          </li>
-
-          <li className="menu-category">
-            <Link to="/" className="menu-title">
-              Hot Offers
-            </Link>
-          </li>
-        </ul>
-
-        <div className="menu-bottom">
-          <ul className="menu-category-list">
             <li className="menu-category">
               <button className="accordion-menu" data-accordion-btn>
-                <p className="menu-title">Language</p>
+                <p className="menu-title">Men's</p>
 
-                <ion-icon
-                  name="caret-back-outline"
-                  className="caret-back"
-                ></ion-icon>
+                <div>
+                  <ion-icon name="add-outline" className="add-icon"></ion-icon>
+                  <ion-icon
+                    name="remove-outline"
+                    className="remove-icon"
+                  ></ion-icon>
+                </div>
               </button>
 
               <ul className="submenu-category-list" data-accordion>
                 <li className="submenu-category">
                   <Link to="/" className="submenu-title">
-                    English
+                    Shirt
                   </Link>
                 </li>
 
                 <li className="submenu-category">
                   <Link to="/" className="submenu-title">
-                    Hindi
+                    Shorts & Jeans
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Safety Shoes
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Wallet
                   </Link>
                 </li>
               </ul>
@@ -654,57 +503,245 @@ export default function Header() {
 
             <li className="menu-category">
               <button className="accordion-menu" data-accordion-btn>
-                <p className="menu-title">Currency</p>
-                <ion-icon
-                  name="caret-back-outline"
-                  className="caret-back"
-                ></ion-icon>
+                <p className="menu-title">Women's</p>
+
+                <div>
+                  <ion-icon name="add-outline" className="add-icon"></ion-icon>
+                  <ion-icon
+                    name="remove-outline"
+                    className="remove-icon"
+                  ></ion-icon>
+                </div>
               </button>
 
               <ul className="submenu-category-list" data-accordion>
                 <li className="submenu-category">
                   <Link to="/" className="submenu-title">
-                    INR ₹;
+                    Dress & Frock
                   </Link>
                 </li>
 
                 <li className="submenu-category">
                   <Link to="/" className="submenu-title">
-                    USD &dollar;
+                    Earrings
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Necklace
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Makeup Kit
                   </Link>
                 </li>
               </ul>
             </li>
+
+            <li className="menu-category">
+              <button className="accordion-menu" data-accordion-btn>
+                <p className="menu-title">Jewelry</p>
+
+                <div>
+                  <ion-icon name="add-outline" className="add-icon"></ion-icon>
+                  <ion-icon
+                    name="remove-outline"
+                    className="remove-icon"
+                  ></ion-icon>
+                </div>
+              </button>
+
+              <ul className="submenu-category-list" data-accordion>
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Earrings
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Couple Rings
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Necklace
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Bracelets
+                  </Link>
+                </li>
+              </ul>
+            </li>
+
+            <li className="menu-category">
+              <button className="accordion-menu" data-accordion-btn>
+                <p className="menu-title">Perfume</p>
+
+                <div>
+                  <ion-icon name="add-outline" className="add-icon"></ion-icon>
+                  <ion-icon
+                    name="remove-outline"
+                    className="remove-icon"
+                  ></ion-icon>
+                </div>
+              </button>
+
+              <ul className="submenu-category-list" data-accordion>
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Clothes Perfume
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Deodorant
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Flower Fragrance
+                  </Link>
+                </li>
+
+                <li className="submenu-category">
+                  <Link to="/" className="submenu-title">
+                    Air Freshener
+                  </Link>
+                </li>
+              </ul>
+            </li>
+
+            <li className="menu-category">
+              <Link to="/" className="menu-title">
+                Blog
+              </Link>
+            </li>
+
+            <li className="menu-category">
+              <Link to="/" className="menu-title">
+                Hot Offers
+              </Link>
+            </li>
           </ul>
 
-          <ul className="menu-social-container">
-            <li>
-              <Link to="/" className="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </Link>
-            </li>
+          <div className="menu-bottom">
+            <ul className="menu-category-list">
+              <li className="menu-category">
+                <button className="accordion-menu" data-accordion-btn>
+                  <p className="menu-title">Language</p>
 
-            <li>
-              <Link to="/" className="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </Link>
-            </li>
+                  <ion-icon
+                    name="caret-back-outline"
+                    className="caret-back"
+                  ></ion-icon>
+                </button>
 
-            <li>
-              <Link to="/" className="social-link">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </Link>
-            </li>
+                <ul className="submenu-category-list" data-accordion>
+                  <li className="submenu-category">
+                    <Link to="/" className="submenu-title">
+                      English
+                    </Link>
+                  </li>
 
-            <li>
-              <Link to="/" className="social-link">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+                  <li className="submenu-category">
+                    <Link to="/" className="submenu-title">
+                      Hindi
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+
+              <li className="menu-category">
+                <button className="accordion-menu" data-accordion-btn>
+                  <p className="menu-title">Currency</p>
+                  <ion-icon
+                    name="caret-back-outline"
+                    className="caret-back"
+                  ></ion-icon>
+                </button>
+
+                <ul className="submenu-category-list" data-accordion>
+                  <li className="submenu-category">
+                    <Link to="/" className="submenu-title">
+                      INR ₹;
+                    </Link>
+                  </li>
+
+                  <li className="submenu-category">
+                    <Link to="/" className="submenu-title">
+                      USD &dollar;
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <ul className="menu-social-container">
+              <li>
+                <Link to="/" className="social-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/" className="social-link">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/" className="social-link">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/" className="social-link">
+                  <ion-icon name="logo-linkedin"></ion-icon>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <div
+        className={
+          sidebarIsOpen
+            ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column"
+            : "side-navbar d-flex justify-content-between flex-wrap flex-column"
+        }
+      >
+        <Nav className="flex-column text-white w-100 p-2">
+          <Nav.Item>
+            <strong>Categories</strong>
+          </Nav.Item>
+          {categories.map((category) => (
+            <Nav.Item key={category}>
+              <LinkContainer
+                to={{
+                  pathname: "/search",
+                  hash: "#hash",
+                  search: "?category=${category}",
+                }}
+                onClick={() => setSidebarIsOpen(false)}
+              >
+                <Nav.Link>{category}</Nav.Link>
+              </LinkContainer>
+            </Nav.Item>
+          ))}
+        </Nav>
+      </div>
+    </div>
   );
 }
 

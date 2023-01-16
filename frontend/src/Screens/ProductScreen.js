@@ -1,10 +1,10 @@
 import { React, useReducer, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Rating from "../Components/Rating";
+import Rating from "../components/Rating";
 import { Helmet } from "react-helmet-async";
-import LoadingBox from "../Components/LoadingBox";
-import ErrorMessage from "../Components/ErrorMessage";
+import LoadingBox from "../components/LoadingBox";
+import ErrorMessage from "../components/ErrorMessage";
 import { getError } from "../utils";
 import { Store } from "../Store";
 

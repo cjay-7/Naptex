@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
-import CheckoutSteps from "../Components/CheckoutSteps";
+import CheckoutSteps from "../components/CheckoutSteps";
 import { Store } from "../Store";
 
 export default function ShippingAddress() {

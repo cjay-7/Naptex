@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Rating(props) {
-  const { rating, numReviews } = props;
+  const { rating, numReviews, caption } = props;
   return (
     <div className="showcase-rating">
       <ion-icon
@@ -52,7 +52,13 @@ export default function Rating(props) {
         }
       ></ion-icon>
 
-      <Link to="/">{numReviews + " Reviews"}</Link>
+      <Link to="/">
+        {caption ? (
+          <span>{caption}</span>
+        ) : (
+          <span>{" " + numReviews + " reviews"}</span>
+        )}
+      </Link>
     </div>
   );
 }

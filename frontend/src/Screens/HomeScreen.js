@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { React, useReducer, useEffect } from "react";
 import axios from "axios";
-import Product from "../Components/Product";
-import Banner from "../Components/Banner";
-import Featured from "../Components/Featured";
-import Testimonials from "../Components/Testimonials";
+import Product from "../components/Product";
+import Banner from "../components/Banner";
+import Featured from "../components/Featured";
+import Testimonials from "../components/Testimonials";
 import logger from "use-reducer-logger";
 import { Helmet } from "react-helmet-async";
-import LoadingBox from "../Components/LoadingBox";
-import ErrorMessage from "../Components/ErrorMessage";
+import LoadingBox from "../components/LoadingBox";
+import ErrorMessage from "../components/ErrorMessage";
 
 const reducer = (state, action) => {
   switch (action.type) {

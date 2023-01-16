@@ -2654,6 +2654,30 @@ input[type="radio"]:focus + .lbl-radio > .marker {
   justify-content: space-between;
   margin-bottom: 3%;
 }
+
+/* sidebar desktop */
+.navbar-brand {
+  font-weight: bold;
+}
+.side-navbar {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  left: -300px;
+  background-color: #100901;
+  transition: 0.5s;
+}
+
+.site-container {
+  transition: 0.4s;
+}
+.active-cont {
+  margin-left: 240px;
+}
+.active-nav {
+  left: 0;
+  z-index: 999;
+}
 /*-----------------------------------*\
   #FOOTER
 \*-----------------------------------*/
