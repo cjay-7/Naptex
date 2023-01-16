@@ -92,7 +92,7 @@ export default function SearchScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=Rs.{page}&query=Rs.{query}&category=Rs.{category}&price=Rs.{price}&rating=Rs.{rating}&order=Rs.{order}`
+          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
@@ -125,7 +125,7 @@ export default function SearchScreen() {
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
-    return `/search?category=Rs.{filterCategory}&query=Rs.{filterQuery}&price=Rs.{filterPrice}&rating=Rs.{filterRating}&order=Rs.{sortOrder}&page=Rs.{filterPage}`;
+    return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
   return (
     <div>
@@ -187,9 +187,7 @@ export default function SearchScreen() {
                 <li key={r.name}>
                   <Link
                     to={getFilterUrl({ rating: r.rating })}
-                    className={
-                      `Rs.{r.rating}` === `Rs.{rating}` ? "text-bold" : ""
-                    }
+                    className={`${r.rating}` === `${rating}` ? "text-bold" : ""}
                   >
                     <Rating caption={" & up"} rating={r.rating}></Rating>
                   </Link>

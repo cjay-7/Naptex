@@ -2309,10 +2309,13 @@ body::-webkit-scrollbar-thumb:hover {
 /*-----------------------------------*\
   #SIGN IN
 \*-----------------------------------*/
-.signin-container,
-.signup-container {
+.signin-container {
   width: 40%;
   height: 70vh;
+}
+.signup-container {
+  width: 40%;
+  margin-bottom: 3%;
 }
 .signin-header,
 .signup-header {
