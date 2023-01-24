@@ -14,18 +14,26 @@ export default function SearchBox() {
   };
 
   return (
-    <Form className="d-flex me-auto search-field" onSubmit={submitHandler}>
+    <Form
+      className="d-flex me-auto search-field header-search-container"
+      onSubmit={submitHandler}
+    >
       <InputGroup>
         <FormControl
           type="text"
           name="q"
           id="q"
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="search products..."
+          placeholder="Enter your product name..."
           aria-label="Search Products"
           aria-describedby="button-search"
         ></FormControl>
-        <Button variant="outline-primary" type="submit" id="button-search">
+        <Button
+          variant="outline-dark"
+          type="submit"
+          id="button-search"
+          className="search-btn"
+        >
           <ion-icon name="search-outline"></ion-icon>
         </Button>
       </InputGroup>

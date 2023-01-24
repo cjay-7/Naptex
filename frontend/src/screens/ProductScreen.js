@@ -71,12 +71,24 @@ export default function ProductScreen(props) {
         <div className="breadcrumbs">Breadcrumbs</div>
         <div className="product-screen-container">
           <div className="product-gallery">
-            <img src={product.image1} alt={product.name} />
-            <img src={product.image2} alt={product.name} />
-            <img src={product.image1} alt={product.name} />
-            <img src={product.image2} alt={product.name} />
-            <img src={product.image1} alt={product.name} />
-            <img src={product.image2} alt={product.name} />
+            <div className="product-gallery-img-container">
+              <img src={product.image1} alt={product.name} />
+            </div>
+            <div className="product-gallery-img-container">
+              <img src={product.image2} alt={product.name} />
+            </div>
+            <div className="product-gallery-img-container">
+              <img src={product.image1} alt={product.name} />
+            </div>
+            <div className="product-gallery-img-container">
+              <img src={product.image2} alt={product.name} />
+            </div>
+            <div className="product-gallery-img-container">
+              <img src={product.image1} alt={product.name} />
+            </div>
+            <div className="product-gallery-img-container">
+              <img src={product.image2} alt={product.name} />
+            </div>
           </div>
 
           <div className="product-info-action">

@@ -23,15 +23,6 @@ export default function Footer() {
             <Link to="/" className="footer-category-link">
               jacket
             </Link>
-            <Link to="/" className="footer-category-link">
-              dress & frock
-            </Link>
-            <Link to="/" className="footer-category-link">
-              innerwear
-            </Link>
-            <Link to="/" className="footer-category-link">
-              hosiery
-            </Link>
           </div>
 
           {/* <div className="footer-category-box">
@@ -171,44 +162,11 @@ export default function Footer() {
 
             <li className="footer-nav-item">
               <Link to="/" className="footer-nav-link">
-                Fashion
+                Shirts
               </Link>
             </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Electronic
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Cosmetic
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Health
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Watches
-              </Link>
-            </li>
-          </ul>
-
-          <ul className="footer-nav-list">
             <li className="footer-nav-item">
               <h2 className="nav-title">Products</h2>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Prices drop
-              </Link>
             </li>
 
             <li className="footer-nav-item">
@@ -219,19 +177,7 @@ export default function Footer() {
 
             <li className="footer-nav-item">
               <Link to="/" className="footer-nav-link">
-                Best sales
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
                 Contact us
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Sitemap
               </Link>
             </li>
           </ul>
@@ -268,42 +214,6 @@ export default function Footer() {
             <li className="footer-nav-item">
               <Link to="/" className="footer-nav-link">
                 Secure payment
-              </Link>
-            </li>
-          </ul>
-
-          <ul className="footer-nav-list">
-            <li className="footer-nav-item">
-              <h2 className="nav-title">Services</h2>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Prices drop
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                New products
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Best sales
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Contact us
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Sitemap
               </Link>
             </li>
           </ul>

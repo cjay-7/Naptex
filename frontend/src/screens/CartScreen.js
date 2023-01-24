@@ -110,12 +110,12 @@ export default function CartScreen() {
                     </div>
                     <div className="cart-table-price">
                       <div>Product Price:</div>
-                      <div>Rs. {item.price}</div>
+                      <div>Rs. {item.discountPrice}</div>
                       <div>
-                        Subtotal: {item.quantity} <span>x </span> {item.price}{" "}
-                        <span>:</span>
+                        Subtotal :{item.quantity} <span>x </span>{" "}
+                        {item.discountPrice}:
                       </div>
-                      <div> Rs. {item.quantity * item.price}</div>
+                      <div> Rs. {item.quantity * item.discountPrice}</div>
                     </div>
                   </div>
                 </div>
@@ -138,7 +138,10 @@ export default function CartScreen() {
             {" Items"}
           </h5>
           <h5>Cart total Price: </h5>
-          <h5>Rs. {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}</h5>
+          <h5>
+            Rs.{" "}
+            {cartItems.reduce((a, c) => a + c.discountPrice * c.quantity, 0)}
+          </h5>
           <button
             className="cart-button"
             disabled={cartItems.length === 0}
