@@ -38,12 +38,12 @@ export default function HeaderTop() {
         <div className="header-top-actions">
           <select name="currency">
             <option value="eur">INR ₹</option>
-            <option value="usd">USD $</option>
+            {/* <option value="usd">USD $</option> */}
           </select>
 
           <select name="language">
             <option value="en-US">English</option>
-            <option value="	hi">Hindi</option>
+            {/* <option value="	hi">Hindi</option> */}
           </select>
         </div>
       </div>

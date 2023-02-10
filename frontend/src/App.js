@@ -21,7 +21,6 @@ import { Store } from "./Store";
 import axios from "axios";
 import { getError } from "./utils";
 import Navbar from "react-bootstrap/Navbar";
-import Badge from "react-bootstrap/Badge";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
@@ -47,6 +46,13 @@ function App() {
 
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const MenCategoryButton = React.useRef(null);
+  const MenCategoryList = React.useRef(null);
+
+  const onClickToggle = (e) => {
+    MenCategoryButton.current.classList.toggle("active");
+    MenCategoryList.current.classList.toggle("active");
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -58,7 +64,28 @@ function App() {
       }
     };
     fetchCategories();
+    // const accordionBtn = document.querySelectorAll("[data-accordion-btn]");
+    // console.log(accordionBtn);
+    // const accordion = document.querySelectorAll("[data-accordion]");
+    // for (let i = 0; i < accordionBtn.length; i++) {
+    //   accordionBtn[i].addEventListener("click", function () {
+    //     const clickedBtn = this.nextElementSibling.classList.contains("active");
+
+    //     for (let i = 0; i < accordion.length; i++) {
+    //       if (clickedBtn) break;
+
+    //       if (accordion[i].classList.contains("active")) {
+    //         accordion[i].classList.remove("active");
+    //         accordionBtn[i].classList.remove("active");
+    //       }
+    //     }
+
+    //     this.nextElementSibling.classList.toggle("active");
+    //     this.classList.toggle("active");
+    //   });
+    // }
   }, []);
+
   return (
     <BrowserRouter>
       <div
@@ -75,12 +102,15 @@ function App() {
           <Navbar className="header-main">
             <Container>
               <div className="header-left">
-                <Button className="header-sidebar-btn"
-                  variant="light"
+                <button
+                  className="header-sidebar-btn"
                   onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
                 >
-                  <ion-icon name="menu-outline"></ion-icon>
-                </Button>
+                  <ion-icon
+                    class={sidebarIsOpen ? "d-none" : "d-block md hydrated"}
+                    name="menu-outline"
+                  ></ion-icon>
+                </button>
                 <Navbar.Brand>
                   <Link to="/" className="header-logo">
                     NAPTEX
@@ -146,24 +176,154 @@ function App() {
               : "side-navbar d-flex justify-content-between flex-wrap flex-column"
           }
         >
-          <Nav className="flex-column text-white w-100 p-2">
-            <Nav.Item>
-              <strong>Categories</strong>
+          <Nav className="flex-column text-white w-100 p-2" data-mobile-menu>
+            <Nav.Item className="menu-top">
+              <h2 className="menu-title">Menu</h2>
+
+              <button
+                className="menu-close-btn"
+                onClick={() => setSidebarIsOpen(false)}
+                data-mobile-menu-close-btn
+              >
+                <ion-icon name="close-outline"></ion-icon>
+              </button>
             </Nav.Item>
-            {categories.map((category) => (
-              <Nav.Item key={category}>
-                <LinkContainer
-                  to={{
-                    pathname: "/search",
-                    hash: "#hash",
-                    search: "?category=${category}",
-                  }}
-                  onClick={() => setSidebarIsOpen(false)}
-                >
-                  <Nav.Link>{category}</Nav.Link>
-                </LinkContainer>
-              </Nav.Item>
-            ))}
+            <Nav.Item>
+              <ul className="mobile-menu-category-list">
+                <li className="menu-category">
+                  <Link to="/" className="menu-title">
+                    Home
+                  </Link>
+                </li>
+
+                <li className="menu-category">
+                  <button
+                    ref={MenCategoryButton}
+                    className="accordion-menu sidebar-button"
+                    data-accordion-btn
+                    onClick={onClickToggle}
+                  >
+                    <p className="menu-title">Men's</p>
+
+                    <div>
+                      <ion-icon
+                        name="add-outline"
+                        className="add-icon"
+                      ></ion-icon>
+                      <ion-icon
+                        name="remove-outline "
+                        className="remove-icon"
+                      ></ion-icon>
+                    </div>
+                  </button>
+
+                  <ul
+                    className="submenu-category-list"
+                    data-accordion
+                    ref={MenCategoryList}
+                  >
+                    {categories.map((category) => (
+                      <Nav.Item className="menu-categories" key={category}>
+                        <LinkContainer
+                          to={{
+                            pathname: "/search",
+                            search: `category=${category}`,
+                          }}
+                          onClick={() => setSidebarIsOpen(false)}
+                        >
+                          <Nav.Link>{category}</Nav.Link>
+                        </LinkContainer>
+                      </Nav.Item>
+                    ))}
+                  </ul>
+                </li>
+
+                <li className="menu-category">
+                  <Link to="/" className="menu-title">
+                    Hot Offers
+                  </Link>
+                </li>
+              </ul>
+            </Nav.Item>
+
+            <Nav.Item className="menu-bottom">
+              {/* <ul className="menu-category-list">
+                <li className="menu-category">
+                  <button className="accordion-menu" data-accordion-btn>
+                    <p className="menu-title">Language</p>
+
+                    <ion-icon
+                      name="caret-back-outline"
+                      className="caret-back"
+                    ></ion-icon>
+                  </button>
+
+                  <ul className="submenu-category-list" data-accordion>
+                    <li className="submenu-category">
+                      <Link to="/" className="submenu-title">
+                        English
+                      </Link>
+                    </li>
+
+                    <li className="submenu-category">
+                      <Link to="/" className="submenu-title">
+                        Hindi
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+
+                <li className="menu-category">
+                  <button className="accordion-menu" data-accordion-btn>
+                    <p className="menu-title">Currency</p>
+                    <ion-icon
+                      name="caret-back-outline"
+                      className="caret-back"
+                    ></ion-icon>
+                  </button>
+
+                  <ul className="submenu-category-list" data-accordion>
+                    <li className="submenu-category">
+                      <Link to="/" className="submenu-title">
+                        INR ₹;
+                      </Link>
+                    </li>
+
+                    <li className="submenu-category">
+                      <Link to="/" className="submenu-title">
+                        USD &dollar;
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+              </ul> */}
+
+              <ul className="menu-social-container">
+                <li>
+                  <Link to="/" className="social-link">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to="/" className="social-link">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to="/" className="social-link">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to="/" className="social-link">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </Link>
+                </li>
+              </ul>
+            </Nav.Item>
           </Nav>
         </div>
         <div className="grid-container">
@@ -197,5 +357,6 @@ function App() {
     </BrowserRouter>
   );
 }
+// accordion variables
 
 export default App;

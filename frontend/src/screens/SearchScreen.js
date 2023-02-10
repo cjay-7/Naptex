@@ -118,19 +118,21 @@ export default function SearchScreen() {
     fetchCategories();
   }, [dispatch]);
 
-  const getFilterUrl = (filter) => {
+  const getFilterUrl = (filter, skipPathname) => {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
     const filterQuery = filter.query || query;
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
-    return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    return `${
+      skipPathname ? "" : "/search?"
+    }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
   return (
     <div>
       <Helmet>
-        <title>Search Products</title>
+        <title>Naptex: Search Products</title>
       </Helmet>
       <Row>
         <Col md={3}>
@@ -208,7 +210,7 @@ export default function SearchScreen() {
           {loading ? (
             <LoadingBox></LoadingBox>
           ) : error ? (
-            <div variant="danger">{error}</div>
+            <div>{error}</div>
           ) : (
             <>
               <Row className="justify-content-between mb-3">
@@ -227,7 +229,7 @@ export default function SearchScreen() {
                         variant="light"
                         onClick={() => navigate("/search")}
                       >
-                        <i className="fas fa-times-circle"></i>
+                        <ion-icon name="close-circle-outline"></ion-icon>
                       </Button>
                     ) : null}
                   </div>
@@ -262,7 +264,10 @@ export default function SearchScreen() {
                   <LinkContainer
                     key={x + 1}
                     className="mx-1"
-                    to={getFilterUrl({ page: x + 1 })}
+                    to={{
+                      pathname: "/search",
+                      search: getFilterUrl({ page: x + 1 }, true),
+                    }}
                   >
                     <Button
                       className={Number(page) === x + 1 ? "text-bold" : ""}

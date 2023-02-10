@@ -127,6 +127,9 @@ a {
 a:visited {
   color: var(--onyx);
 }
+p {
+  margin-bottom: 0;
+}
 span {
   display: inline-block;
 }
@@ -167,6 +170,10 @@ body {
   background: var(--white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+body.no-scroll {
+  height: 100%;
+  overflow-y: hidden;
 }
 
 /**
@@ -617,6 +624,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .header-search-container {
   position: relative;
+  width: 80vw;
 }
 .action-btn a {
   color: var(--onyx);
@@ -734,8 +742,8 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .menu-top {
-  padding-bottom: 15px;
-  margin-bottom: 10px;
+  margin: 30% 0 10px;
+  padding: 0 10% 9%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -767,7 +775,8 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .mobile-menu-category-list {
-  margin-bottom: 30px;
+  margin: 0 10% 30px;
+  padding-left: 0;
 }
 
 .menu-category .accordion-menu {
@@ -796,7 +805,14 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: var(--weight-500);
   padding: 12px 0;
 }
+.sidebar-button {
+  aspect-ratio: 7.41;
+}
 
+.nav-link {
+  padding: var(--bs-nav-link-padding-y) 0;
+  font-size: 0.9em;
+}
 .accordion-menu > div {
   font-size: 14px;
 }
@@ -843,10 +859,12 @@ body::-webkit-scrollbar-thumb:hover {
 .submenu-category-list.active {
   max-height: 148px;
   visibility: visible;
+  padding-left: 0;
 }
 
 .menu-bottom .menu-category-list {
-  margin-bottom: 20px;
+  margin: 0 10% 20px;
+  padding-left: 0;
 }
 
 .menu-bottom .menu-category {
@@ -894,6 +912,7 @@ body::-webkit-scrollbar-thumb:hover {
   -ms-flex-align: center;
   align-items: center;
   gap: 10px;
+  padding-left: 0;
 }
 
 .menu-social-container .social-link {
@@ -2672,11 +2691,19 @@ input[type="radio"]:focus + .lbl-radio > .marker {
 }
 .side-navbar {
   width: 240px;
-  height: 100%;
-  position: absolute;
+  height: 100vh;
+  position: fixed;
   left: -300px;
-  background-color: #100901;
+  background: var(--white);
   transition: 0.5s;
+  -webkit-box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.1);
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.1);
+
+  -ms-scroll-chaining: none;
+  -webkit-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
+  transition: 0.5s ease;
+  z-index: 20;
 }
 
 .site-container {
@@ -2801,6 +2828,7 @@ footer {
 
 .footer-nav-item {
   padding: 3px 0;
+  margin: 0;
 }
 
 .footer-nav-link,
@@ -3428,6 +3456,7 @@ footer {
   }
   .header-sidebar-btn {
     display: block;
+    transition: 1s ease-out;
   }
   .navbar > .container {
     flex-direction: row !important;

@@ -15,7 +15,7 @@ export default function SearchBox() {
 
   return (
     <Form
-      className="d-flex me-auto search-field header-search-container"
+      className="d-flex  search-field header-search-container"
       onSubmit={submitHandler}
     >
       <InputGroup>

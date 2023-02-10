@@ -1,4 +1,4 @@
-import { React, useReducer, useEffect, useContext } from "react";
+import { React, useReducer, useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Rating from "../components/Rating";
@@ -7,6 +7,9 @@ import LoadingBox from "../components/LoadingBox";
 import ErrorMessage from "../components/ErrorMessage";
 import { getError } from "../utils";
 import { Store } from "../Store";
+import Button from "react-bootstrap/Button";
+
+import CustomizeModal from "../components/CustomizeModal";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -22,6 +25,8 @@ const reducer = (state, action) => {
 };
 
 export default function ProductScreen(props) {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
@@ -128,9 +133,17 @@ export default function ProductScreen(props) {
                     Create your size in just 30 seconds with our fitsmart
                     technology.
                   </span>
-                  <button className="product-btn-action">
-                    Create Custom Size
-                  </button>
+                  <Button
+                    variant="dark"
+                    className="openModalBtn"
+                    onClick={() => {
+                      setModalOpen(true);
+                    }}
+                  >
+                    CUSTOMIZE SIZE
+                  </Button>
+
+                  {modalOpen && <CustomizeModal setOpenModal={setModalOpen} />}
                 </div>
                 <div className="customizeCart">
                   <button className="product-btn-action">Customize</button>
