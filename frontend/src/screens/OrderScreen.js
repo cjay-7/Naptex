@@ -1,8 +1,5 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer, useState } from "react";
-// import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { loadStripe } from "@stripe/stripe-js/pure";
-import StripeCheckout from "../components/StripeCheckout";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
@@ -18,14 +15,6 @@ function reducer(state, action) {
       return { ...state, loading: false, order: action.payload, error: "" };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
-    // case "PAY_REQUEST":
-    //   return { ...state, loadingPay: true };
-    // case "PAY_SUCCESS":
-    //   return { ...state, loadingPay: false, successPay: true };
-    // case "PAY_FAIL":
-    //   return { ...state, loadingPay: false };
-    // case "PAY_RESET":
-    //   return { ...state, loadingPay: false, successPay: false };
     default:
       return state;
   }
@@ -43,51 +32,9 @@ export default function OrderScreen() {
     loading: true,
     order: {},
     error: "",
-    // successPay: false,
-    // loadingPay: false,
   });
 
-  // const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
-
-  // function createOrder(data, actions) {
-  //   return actions.order
-  //     .create({
-  //       purchase_units: [
-  //         {
-  //           amount: { value: order.totalPrice },
-  //         },
-  //       ],
-  //     })
-  //     .then((orderID) => {
-  //       return orderID;
-  //     });
-  // }
-
-  // function onApprove(data, actions) {
-  //   return actions.order.capture().then(async function (details) {
-  //     try {
-  //       dispatch({ type: "PAY_REQUEST" });
-  //       const { data } = await axios.put(
-  //         `/api/orders/${order._id}/pay`,
-  //         details,
-  //         {
-  //           headers: { authorization: `Bearer ${userInfo.token}` },
-  //         }
-  //       );
-  //       dispatch({ type: "PAY_SUCCESS", payload: data });
-  //       toast.success("Order is paid");
-  //     } catch (err) {
-  //       dispatch({ type: "PAY_FAIL", payload: getError(err) });
-  //       toast.error(getError(err));
-  //     }
-  //   });
-  // }
-  // function onError(err) {
-  //   toast.error(getError(err));
-  // }
-
-  const [stripe, setStripe] = useState(null);
-  const handleSuccessPayment = useEffect(() => {
+  useEffect(() => {
     const fetchOrder = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
@@ -105,37 +52,8 @@ export default function OrderScreen() {
 
     if (!order._id || (order._id && order._id !== orderId)) {
       fetchOrder();
-
-      //   if (successPay) {
-      //     dispatch({ type: "PAY_RESET" });
-      //   }
-      // } else {
-      //   const loadPaypalScript = async () => {
-      //     const { data: clientId } = await axios.get("/api/keys/paypal", {
-      //       headers: { authorization: `Bearer ${userInfo.token}` },
-      //     });
-      //     paypalDispatch({
-      //       type: "resetOptions",
-      //       value: {
-      //         "client-id": clientId,
-      //         currency: "USD",
-      //       },
-      //     });
-      //     paypalDispatch({ type: "setLoadingStatus", value: "pending" });
-      //   };
-      //   loadPaypalScript();
     }
-    const addStripeScript = async () => {
-      const { data: clientId } = await axios.get("/api/stripe/key");
-      const stripeObj = await loadStripe(clientId);
-      setStripe(stripeObj);
-    };
-    if (order.paymentMethod === "stripe") {
-      if (!stripe) {
-        addStripeScript();
-      }
-    }
-  }, [order, userInfo, orderId, navigate, stripe]);
+  }, [order, userInfo, orderId, navigate]);
 
   return loading ? (
     <LoadingBox></LoadingBox>
@@ -233,30 +151,6 @@ export default function OrderScreen() {
               </div>
             </div>
           </div>
-          {!order.isPaid && !stripe && <LoadingBox />}
-          {!order.isPaid && stripe && (
-            <StripeCheckout
-              stripe={stripe}
-              orderId={order._id}
-              // handleSuccessPayment={handleSuccessPayment}
-            />
-          )}
-          {/* {!order.isPaid && (
-            <div>
-              {isPending ? (
-                <LoadingBox />
-              ) : (
-                <div>
-                  <PayPalButtons
-                    createOrder={createOrder}
-                    onApprove={onApprove}
-                    onError={onError}
-                  ></PayPalButtons>
-                </div>
-              )}
-              {loadingPay && <LoadingBox></LoadingBox>}
-            </div>
-          )} */}
         </div>
       </div>
     </div>
