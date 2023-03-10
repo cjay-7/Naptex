@@ -5,7 +5,7 @@ import Product from "../components/Product";
 import Banner from "../components/Banner";
 import Featured from "../components/Featured";
 import Testimonials from "../components/Testimonials";
-import logger from "use-reducer-logger";
+
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import ErrorMessage from "../components/ErrorMessage";
