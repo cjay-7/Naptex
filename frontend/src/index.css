@@ -9,30 +9,7 @@
 /*-----------------------------------*\
   #CUSTOM PROPERTY
 \*-----------------------------------*/
-@font-face {
-  font-family: "Neutral Jack Black";
-  src: url("../public/assets/Typeface/MBF\ Neutral\ Jack\ Black.ttf");
-  font-weight: bolder;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Neutral Jack";
-  src: url("../public/assets/Typeface/MBF\ Neutral\ Jack\ Regular.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Neutral Jack";
-  src: url("../public/assets/Typeface/MBF\ Neutral\ Jack\ Light.ttf");
-  font-weight: light;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Neutral Jack";
-  src: url("../public/assets/Typeface/MBF\ Neutral\ Jack\ Bold.ttf");
-  font-weight: bold;
-  font-style: normal;
-}
+
 :root {
   height: 100%;
   /**
@@ -52,6 +29,30 @@
   /**
    * typography
    */
+  @font-face {
+    font-family: "Neutral Jack Black";
+    src: url("../public/assets/Typeface/MBF\ Neutral\ Jack\ Black.ttf");
+    font-weight: bolder;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Neutral Jack";
+    src: url("../public/assets/Typeface/MBF\ Neutral\ Jack\ Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Neutral Jack";
+    src: url("../public/assets/Typeface/MBF\ Neutral\ Jack\ Light.ttf");
+    font-weight: light;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Neutral Jack";
+    src: url("../public/assets/Typeface/MBF\ Neutral\ Jack\ Bold.ttf");
+    font-weight: bold;
+    font-style: normal;
+  }
 
   --fs-1: 1.563rem;
   --fs-2: 1.375rem;
