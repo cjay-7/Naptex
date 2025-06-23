@@ -8,7 +8,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Rating from "../components/Rating";
 import LoadingBox from "../components/LoadingBox";
-
 import Button from "react-bootstrap/Button";
 import Product from "../components/Product";
 import LinkContainer from "react-router-bootstrap/LinkContainer";
@@ -54,17 +53,14 @@ export const ratings = [
     name: "4stars & up",
     rating: 4,
   },
-
   {
     name: "3stars & up",
     rating: 3,
   },
-
   {
     name: "2stars & up",
     rating: 2,
   },
-
   {
     name: "1stars & up",
     rating: 1,
@@ -74,11 +70,12 @@ export const ratings = [
 export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const sp = new URLSearchParams(search); // /search?category=Shirts
+  const sp = new URLSearchParams(search);
   const category = sp.get("category") || "all";
   const query = sp.get("query") || "all";
   const price = sp.get("price") || "all";
   const rating = sp.get("rating") || "all";
+  const brand = sp.get("brand") || "all";
   const order = sp.get("order") || "newest";
   const page = sp.get("page") || 1;
 
@@ -92,7 +89,7 @@ export default function SearchScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&brand=${brand}&order=${order}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
@@ -103,9 +100,11 @@ export default function SearchScreen() {
       }
     };
     fetchData();
-  }, [category, error, order, page, price, query, rating]);
+  }, [category, error, order, page, price, query, rating, brand]);
 
   const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -115,7 +114,18 @@ export default function SearchScreen() {
         toast.error(getError(err));
       }
     };
+
+    const fetchBrands = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/brands`);
+        setBrands(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+
     fetchCategories();
+    fetchBrands();
   }, [dispatch]);
 
   const getFilterUrl = (filter, skipPathname) => {
@@ -124,110 +134,213 @@ export default function SearchScreen() {
     const filterQuery = filter.query || query;
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
+    const filterBrand = filter.brand || brand;
     const sortOrder = filter.order || order;
     return `${
       skipPathname ? "" : "/search?"
-    }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&brand=${filterBrand}&order=${sortOrder}&page=${filterPage}`;
   };
+
+  // Organize categories by type
+  const menCategories = categories.filter((cat) => cat.startsWith("Men's"));
+  const womenCategories = categories.filter((cat) => cat.startsWith("Women's"));
+  const childrenCategories = categories.filter((cat) =>
+    cat.startsWith("Children's")
+  );
+
   return (
-    <div>
+    <div className="container">
       <Helmet>
         <title>Naptex: Search Products</title>
       </Helmet>
       <Row>
         <Col md={3}>
-          <h3>Department</h3>
-          <div>
-            <ul>
-              <li>
-                <Link
-                  className={"all" === category ? "text-bold" : ""}
-                  to={getFilterUrl({ category: "all" })}
-                >
-                  Any
-                </Link>
-              </li>
-              {categories.map((c) => (
-                <li key={c}>
+          <div className="search-sidebar">
+            {/* Categories Filter */}
+            <div>
+              <h3>Department</h3>
+              <ul>
+                <li>
                   <Link
-                    className={c === category ? "text-bold" : ""}
-                    to={getFilterUrl({ category: c })}
+                    className={"all" === category ? "text-bold" : ""}
+                    to={getFilterUrl({ category: "all" })}
                   >
-                    {c}
+                    Any
                   </Link>
                 </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Price</h3>
-            <ul>
-              <li>
-                <Link
-                  className={"all" === price ? "text-bold" : ""}
-                  to={getFilterUrl({ price: "all" })}
-                >
-                  Any
-                </Link>
-              </li>
-              {prices.map((p) => (
-                <li key={p.value}>
+
+                {/* Men's Categories */}
+                {menCategories.length > 0 && (
+                  <>
+                    <li className="category-group">Men's</li>
+                    {menCategories.map((c) => (
+                      <li
+                        key={c}
+                        className="category-item"
+                      >
+                        <Link
+                          className={c === category ? "text-bold" : ""}
+                          to={getFilterUrl({ category: c })}
+                        >
+                          {c.replace("Men's ", "")}
+                        </Link>
+                      </li>
+                    ))}
+                  </>
+                )}
+
+                {/* Women's Categories */}
+                {womenCategories.length > 0 && (
+                  <>
+                    <li className="category-group">Women's</li>
+                    {womenCategories.map((c) => (
+                      <li
+                        key={c}
+                        className="category-item"
+                      >
+                        <Link
+                          className={c === category ? "text-bold" : ""}
+                          to={getFilterUrl({ category: c })}
+                        >
+                          {c.replace("Women's ", "")}
+                        </Link>
+                      </li>
+                    ))}
+                  </>
+                )}
+
+                {/* Children's Categories */}
+                {childrenCategories.length > 0 && (
+                  <>
+                    <li className="category-group">Children's</li>
+                    {childrenCategories.map((c) => (
+                      <li
+                        key={c}
+                        className="category-item"
+                      >
+                        <Link
+                          className={c === category ? "text-bold" : ""}
+                          to={getFilterUrl({ category: c })}
+                        >
+                          {c.replace("Children's ", "")}
+                        </Link>
+                      </li>
+                    ))}
+                  </>
+                )}
+              </ul>
+            </div>
+
+            {/* Brands Filter */}
+            <div>
+              <h3>Brands</h3>
+              <ul>
+                <li>
                   <Link
-                    to={getFilterUrl({ price: p.value })}
-                    className={p.value === price ? "text-bold" : ""}
+                    className={"all" === brand ? "text-bold" : ""}
+                    to={getFilterUrl({ brand: "all" })}
                   >
-                    {p.name}
+                    Any
                   </Link>
                 </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Avg. Customer Review</h3>
-            <ul>
-              {ratings.map((r) => (
-                <li key={r.name}>
+                {brands.map((b) => (
+                  <li key={b}>
+                    <Link
+                      to={getFilterUrl({ brand: b })}
+                      className={b === brand ? "text-bold" : ""}
+                    >
+                      {b}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Price Filter */}
+            <div>
+              <h3>Price</h3>
+              <ul>
+                <li>
                   <Link
-                    to={getFilterUrl({ rating: r.rating })}
-                    className={`${r.rating}` === `${rating}` ? "text-bold" : ""}
+                    className={"all" === price ? "text-bold" : ""}
+                    to={getFilterUrl({ price: "all" })}
                   >
-                    <Rating caption={" & up"} rating={r.rating}></Rating>
+                    Any
                   </Link>
                 </li>
-              ))}
-              <li>
-                <Link
-                  to={getFilterUrl({ rating: "all" })}
-                  className={rating === "all" ? "text-bold" : ""}
-                >
-                  <Rating caption={" & up"} rating={0}></Rating>
-                </Link>
-              </li>
-            </ul>
+                {prices.map((p) => (
+                  <li key={p.value}>
+                    <Link
+                      to={getFilterUrl({ price: p.value })}
+                      className={p.value === price ? "text-bold" : ""}
+                    >
+                      {p.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Rating Filter */}
+            <div>
+              <h3>Avg. Customer Review</h3>
+              <ul>
+                {ratings.map((r) => (
+                  <li key={r.name}>
+                    <Link
+                      to={getFilterUrl({ rating: r.rating })}
+                      className={
+                        `${r.rating}` === `${rating}` ? "text-bold" : ""
+                      }
+                    >
+                      <Rating
+                        caption={" & up"}
+                        rating={r.rating}
+                      ></Rating>
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    to={getFilterUrl({ rating: "all" })}
+                    className={rating === "all" ? "text-bold" : ""}
+                  >
+                    <Rating
+                      caption={" & up"}
+                      rating={0}
+                    ></Rating>
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </Col>
+
         <Col md={9}>
           {loading ? (
             <LoadingBox></LoadingBox>
           ) : error ? (
             <div>{error}</div>
           ) : (
-            <>
+            <div className="search-results">
               <Row className="justify-content-between mb-3">
                 <Col md={6}>
                   <div>
                     {countProducts === 0 ? "No" : countProducts} Results
                     {query !== "all" && " : " + query}
                     {category !== "all" && " : " + category}
+                    {brand !== "all" && " : " + brand}
                     {price !== "all" && " : Price " + price}
                     {rating !== "all" && " : Rating " + rating + " & up"}
                     {query !== "all" ||
                     category !== "all" ||
                     rating !== "all" ||
-                    price !== "all" ? (
+                    price !== "all" ||
+                    brand !== "all" ? (
                       <Button
                         variant="light"
                         onClick={() => navigate("/search")}
+                        style={{ marginLeft: "10px" }}
                       >
                         <ion-icon name="close-circle-outline"></ion-icon>
                       </Button>
@@ -249,17 +362,21 @@ export default function SearchScreen() {
                   </select>
                 </Col>
               </Row>
+
               {products.length === 0 && <div>No Product Found</div>}
 
-              <Row>
+              {/* Use the same product grid as home screen */}
+              <div className="product-grid">
                 {products.map((product) => (
-                  <Col sm={6} lg={4} className="mb-3" key={product._id}>
-                    <Product product={product}></Product>
-                  </Col>
+                  <Product
+                    key={product._id}
+                    product={product}
+                  ></Product>
                 ))}
-              </Row>
+              </div>
 
-              <div>
+              {/* Pagination */}
+              <div style={{ marginTop: "30px", textAlign: "center" }}>
                 {[...Array(pages).keys()].map((x) => (
                   <LinkContainer
                     key={x + 1}
@@ -278,7 +395,7 @@ export default function SearchScreen() {
                   </LinkContainer>
                 ))}
               </div>
-            </>
+            </div>
           )}
         </Col>
       </Row>

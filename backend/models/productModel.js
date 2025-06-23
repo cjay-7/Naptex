@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema(
     image1: { type: String, required: true },
     image2: { type: String, required: true },
     category: { type: String, required: true },
+    brand: { type: String, required: true }, // Added brand field
     description: { type: String, required: true },
     showcaseBadge: { type: String, required: true },
     discountPrice: { type: Number, required: true },

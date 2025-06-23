@@ -1,6 +1,6 @@
 import { React, useReducer, useEffect, useContext, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import Rating from "../components/Rating";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
@@ -73,26 +73,62 @@ export default function ProductScreen(props) {
   ) : (
     <div className="product-screen">
       <div className="container">
-        <div className="breadcrumbs">Breadcrumbs</div>
+        <div className="breadcrumbs">
+          <Link to="/">Home</Link> &gt;
+          <Link to={`/search?category=${product.category}`}>
+            {" "}
+            {product.category}
+          </Link>{" "}
+          &gt;
+          {product.brand && (
+            <>
+              <Link to={`/search?brand=${product.brand}`}>
+                {" "}
+                {product.brand}
+              </Link>{" "}
+              &gt;
+            </>
+          )}
+          <span> {product.name}</span>
+        </div>
+
         <div className="product-screen-container">
           <div className="product-gallery">
             <div className="product-gallery-img-container">
-              <img src={product.image1} alt={product.name} />
+              <img
+                src={product.image1}
+                alt={product.name}
+              />
             </div>
             <div className="product-gallery-img-container">
-              <img src={product.image2} alt={product.name} />
+              <img
+                src={product.image2}
+                alt={product.name}
+              />
             </div>
             <div className="product-gallery-img-container">
-              <img src={product.image1} alt={product.name} />
+              <img
+                src={product.image1}
+                alt={product.name}
+              />
             </div>
             <div className="product-gallery-img-container">
-              <img src={product.image2} alt={product.name} />
+              <img
+                src={product.image2}
+                alt={product.name}
+              />
             </div>
             <div className="product-gallery-img-container">
-              <img src={product.image1} alt={product.name} />
+              <img
+                src={product.image1}
+                alt={product.name}
+              />
             </div>
             <div className="product-gallery-img-container">
-              <img src={product.image2} alt={product.name} />
+              <img
+                src={product.image2}
+                alt={product.name}
+              />
             </div>
           </div>
 
@@ -100,6 +136,26 @@ export default function ProductScreen(props) {
             <div className="container">
               <div className="product-info">
                 <h2>{product.category}</h2>
+
+                {/* Display Brand */}
+                {product.brand && (
+                  <h3
+                    style={{
+                      color: "#666",
+                      fontSize: "1.1rem",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Brand:{" "}
+                    <Link
+                      to={`/search?brand=${product.brand}`}
+                      style={{ color: "#333", textDecoration: "none" }}
+                    >
+                      {product.brand}
+                    </Link>
+                  </h3>
+                )}
+
                 <Helmet>
                   <title>Naptex: {product.name}</title>
                 </Helmet>
@@ -123,8 +179,10 @@ export default function ProductScreen(props) {
                     )}
                   </div>
                 </div>
-                {/* Description:
-                    <p>{product.description}</p> */}
+                <div style={{ marginTop: "15px" }}>
+                  <strong>Description:</strong>
+                  <p>{product.description}</p>
+                </div>
               </div>
 
               <div className="product-action">
@@ -150,6 +208,7 @@ export default function ProductScreen(props) {
                   <button
                     onClick={addToCartHandler}
                     className="product-btn-action"
+                    disabled={product.countInStock === 0}
                   >
                     Add To Cart
                   </button>

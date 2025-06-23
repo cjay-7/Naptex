@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
-export default function product(props) {
+export default function Product(props) {
   const { product } = props;
   return (
-    <div key={product.slug} className="showcase">
+    <div
+      key={product.slug}
+      className="showcase"
+    >
       <div className="showcase-banner">
         <Link to={`/product/${product.slug}`}>
           <img
@@ -51,9 +54,29 @@ export default function product(props) {
       </div>
 
       <div className="showcase-content">
-        <Link to="/" className="showcase-category">
+        <Link
+          to="/"
+          className="showcase-category"
+        >
           {product.category}
         </Link>
+
+        {/* Display Brand */}
+        {product.brand && (
+          <Link
+            to={`/search?brand=${product.brand}`}
+            className="showcase-brand"
+            style={{
+              fontSize: "0.8rem",
+              color: "#666",
+              textDecoration: "none",
+              display: "block",
+              marginBottom: "5px",
+            }}
+          >
+            {product.brand}
+          </Link>
+        )}
 
         <Link to={`/product/${product.slug}`}>
           <h3 className="showcase-title">{product.name}</h3>
